@@ -3,8 +3,9 @@
 //
 
 #ifndef JAM_SUPERHEROE_GAME_HPP
-#define JAM_SUPERHEROE_GAME_HPP
+    #define JAM_SUPERHEROE_GAME_HPP
 
+#include "Mob.hpp"
 
 class Game
 {
@@ -12,7 +13,7 @@ class Game
         Game();
         ~Game() = default;
 
-        void getMobs();
+        std::vector<Mob> getMobs();
 
         void addMob(Mob mob);
         void removeMob(Mob mob);

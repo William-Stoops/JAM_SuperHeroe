@@ -5,8 +5,12 @@
 ## Makefile
 ##
 
+CLASS	=	./src/class/Game.cpp \
+			./src/class/Mob.cpp \
+
 SRC	=	src/main.cpp	\
-		src/SFML/Sfml.cpp
+		src/SFML/Sfml.cpp \
+		$(CLASS)
 
 OBJ		=	$(SRC:.cpp=.o)
 

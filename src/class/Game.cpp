@@ -9,7 +9,7 @@ Game::Game()
     this->_mobs = std::vector<Mob>();
 }
 
-void Game::getMobs()
+std::vector<Mob> Game::getMobs()
 {
     return this->_mobs;
 }
