@@ -47,6 +47,6 @@ void sfml(void)
 
 int main(void)
 {
-    sfml();
+    SFML sfml;
     return 0;
 }

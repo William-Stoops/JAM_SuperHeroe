@@ -8,6 +8,7 @@
 SRC	=	src/main.cpp	\
 		src/SFML/Sfml.cpp	\
 		src/Character.cpp	\
+		src/SFML/Sfml.cpp \
 
 OBJ		=	$(SRC:.cpp=.o)
 

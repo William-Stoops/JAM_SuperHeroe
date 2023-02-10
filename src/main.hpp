@@ -22,4 +22,5 @@
     #include <sstream>
     #include <map>
 
+void game_over_loop(SFML sfml);
 #endif /* !MAIN_HPP_ */
