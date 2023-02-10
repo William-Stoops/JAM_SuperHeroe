@@ -10,6 +10,7 @@ void SFML::addsprite(std::string &name, std::string &path)
 {
     sf::Texture texture;
     sf::Sprite sprite;
+    printf("%s", path);
     if (!texture.loadFromFile(path))
         return;
     sprite.setTexture(texture);

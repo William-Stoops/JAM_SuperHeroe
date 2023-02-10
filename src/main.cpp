@@ -40,5 +40,6 @@ int main(int ac, char **av)
 {
     SFML sfml;
     game_over_loop(sfml);
+    sfml.addsprite("joueur", "joueur.png");
     return 0;
 }
