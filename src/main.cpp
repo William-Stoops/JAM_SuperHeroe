@@ -17,6 +17,7 @@ void sfml(void)
 {
     SFML sfml;
     Character character(100, 100);
+    character.updateEndurance(50);
 
     while (sfml.window->isOpen())
     {
