@@ -40,6 +40,7 @@ class Character {
         void moveUp();
         void moveDown();
         void updateHealth(float value);
+        void updateEndurance(float value);
         void move(int key);
 
         void draw(sf::RenderWindow& window) const;
@@ -48,7 +49,9 @@ class Character {
         sf::RectangleShape rectangle;
         ProgressBar _healthBar;
         sf::Sprite _sprite;
+        ProgressBar _weaponBar;
         float _health;
+        float _endurance;
 };
 
 #endif /* !CHARACTER_HPP_ */
