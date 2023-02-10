@@ -27,6 +27,7 @@ class SFML {
         sf::Text *text;
         sf::RectangleShape *rectangle;
         std::map<std::string,sf::Sprite> _sprite;
+        sf::Vector2f *last_mouse_pos;
 };
 
 #endif /* !SFML_HPP_ */

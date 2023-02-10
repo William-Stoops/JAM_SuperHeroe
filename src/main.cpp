@@ -25,6 +25,18 @@ void detectInput(int keyCode, Character &character)
         character.move(keyCode);
 }
 
+sf::Vector2f get_shoot_vector(sf::Vector2f *last_mouse_pos, sf::Vector2f center, double speed)
+{
+    sf::Vector2f shoot_vector;
+
+    double angle = atan((last_mouse_pos->y - center.y) / (last_mouse_pos->x - center.x));
+
+    shoot_vector.x = cos(angle) * speed;
+    shoot_vector.y = sin(angle) * speed;
+
+    return shoot_vector;
+}
+
 void sfml(void)
 {
     SFML sfml;
@@ -38,7 +50,12 @@ void sfml(void)
                 sfml.window->close();
             if (event.type == sf::Event::KeyPressed)
                 detectInput(event.key.code, character);
+            if (event.type == sf::Event::MouseMoved) {
+                sfml.last_mouse_pos->x = event.mouseMove.x;
+                sfml.last_mouse_pos->y = event.mouseMove.y;
+            }
         }
+        //std::cout << get_shoot_vector(sfml.last_mouse_pos, (sf::Vector2f) {(800 / 2), (800 / 2)}, 1).x << " " << get_shoot_vector(sfml.last_mouse_pos, (sf::Vector2f) {(800 / 2), (800 / 2)}, 1).y << std::endl;
         sfml.window->clear();
         character.draw(*sfml.window);
         sfml.window->display();
