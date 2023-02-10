@@ -33,7 +33,7 @@ static std::map<int, Direction> keyMap = {
 
 class Character {
     public:
-        Character(float x, float y);
+        Character(float x, float y, sf::Sprite &sprite);
 
         void moveLeft();
         void moveRight();
@@ -47,6 +47,7 @@ class Character {
     private:
         sf::RectangleShape rectangle;
         ProgressBar _healthBar;
+        sf::Sprite _sprite;
         float _health;
 };
 

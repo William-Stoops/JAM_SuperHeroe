@@ -31,8 +31,8 @@ class ProgressBar {
         ProgressBar(float x, float y, ProgressBarType type) {
             bar.setSize(progressBarSize[type]);
             bar.setFillColor(progressBarColor[type]);
-            bar.setPosition(x, y);
             _pos = sf::Vector2f(x, y);
+            bar.setPosition(_pos);
         }
 
         sf::Vector2f getPosition() const {
@@ -41,7 +41,7 @@ class ProgressBar {
 
         void setPosition(float x, float y) {
             _pos = sf::Vector2f(x, y);
-            bar.setPosition(x, y);
+            bar.setPosition(_pos);
         }
 
         void draw(sf::RenderWindow &window) const {

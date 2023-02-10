@@ -7,37 +7,38 @@
 
 #include "Character.hpp"
 
-Character::Character(float x, float y)
+Character::Character(float x, float y, sf::Sprite &sprite)
 {
-    rectangle.setSize(sf::Vector2f(50, 50));
-    rectangle.setFillColor(sf::Color::Red);
-    rectangle.setPosition(x, y);
     _healthBar = ProgressBar(x, y + CHARACTERSIZE + 5, HEALTH);
     _health = 100;
+    _sprite = sprite;
+    _sprite.setPosition(x, y);
+    sf::Vector2f scale(0.01, 0.01);
+    _sprite.setScale(scale);
 }
 
 void Character::moveLeft() {
-    if (rectangle.getPosition().x < SPEED) return;
+    if (_sprite.getPosition().x < SPEED) return;
     _healthBar.setPosition(_healthBar.getPosition().x - SPEED, _healthBar.getPosition().y);
-    rectangle.move(-SPEED, 0);
+    _sprite.move(-SPEED, 0);
 }
 
 void Character::moveRight() {
-    if (rectangle.getPosition().x > WINDOWX - (CHARACTERSIZE + SPEED)) return;
+    if (_sprite.getPosition().x > WINDOWX - (CHARACTERSIZE + SPEED)) return;
     _healthBar.setPosition(_healthBar.getPosition().x + SPEED, _healthBar.getPosition().y);
-    rectangle.move(SPEED, 0);
+    _sprite.move(SPEED, 0);
 }
 
 void Character::moveUp() {
-    if (rectangle.getPosition().y < SPEED) return;
+    if (_sprite.getPosition().y < SPEED) return;
     _healthBar.setPosition(_healthBar.getPosition().x, _healthBar.getPosition().y - SPEED);
-    rectangle.move(0, -SPEED);
+    _sprite.move(0, -SPEED);
 }
 
 void Character::moveDown() {
-    if (rectangle.getPosition().y > WINDOWY - (CHARACTERSIZE + SPEED)) return;
+    if (_sprite.getPosition().y > WINDOWY - (CHARACTERSIZE + SPEED)) return;
     _healthBar.setPosition(_healthBar.getPosition().x, _healthBar.getPosition().y + SPEED);
-    rectangle.move(0, SPEED);
+    _sprite.move(0, SPEED);
 }
 
 void Character::updateHealth(float value) {
@@ -57,7 +58,7 @@ void Character::move(int key) {
 }
 
 void Character::draw(sf::RenderWindow& window) const {
-    window.draw(rectangle);
+    window.draw(_sprite);
     _healthBar.draw(window);
 }
 

@@ -28,7 +28,7 @@ void detectInput(int keyCode, Character &character)
 void sfml(void)
 {
     SFML sfml;
-    Character character(100, 100);
+    Character character(100, 100, sfml._sprite["spiderman"]);
 
     while (sfml.window->isOpen())
     {
@@ -47,6 +47,6 @@ void sfml(void)
 
 int main(void)
 {
-    SFML sfml;
+    sfml();
     return 0;
 }

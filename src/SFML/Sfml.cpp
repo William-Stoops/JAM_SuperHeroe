@@ -6,7 +6,7 @@
 */
 
 #include "Sfml.hpp"
-void SFML::addsprite(std::string &name, std::string &path)
+void SFML::addsprite(const char *name, const char *path)
 {
     sf::Texture texture;
     sf::Sprite sprite;
@@ -14,7 +14,8 @@ void SFML::addsprite(std::string &name, std::string &path)
         return;
     sprite.setTexture(texture);
     sprite.setPosition(0, 0);
-    _sprite[name] = sprite;
+    std::string str(name);
+    _sprite[str] = sprite;
 }
 
 SFML::SFML() {
@@ -32,4 +33,5 @@ SFML::SFML() {
     this->rectangle->setFillColor(sf::Color::Transparent);
     this->rectangle->setOutlineThickness(2);
     this->rectangle->setOutlineColor(sf::Color::White);
+    addsprite("spiderman", "assets/spelunky.png");
 }

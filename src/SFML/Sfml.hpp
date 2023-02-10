@@ -20,8 +20,7 @@ class SFML {
     public:
         SFML();
         ~SFML() = default;
-
-        void addsprite(std::string &name, std::string &path);
+        void addsprite(const char *name, const char *path);
 
         sf::RenderWindow *window;
         sf::Font *font;
