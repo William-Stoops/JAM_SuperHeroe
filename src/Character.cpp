@@ -12,6 +12,7 @@ Character::Character(float x, float y, sf::Sprite &sprite)
 {
     _sprite = sprite;
     _sprite.setPosition(x, y);
+    _sprite.setTextureRect(sf::IntRect(0, 0, 820, 858));
     sf::Vector2f scale(0.05, 0.05);
     _sprite.setScale(scale);
     sf::FloatRect rect = _sprite.getGlobalBounds();
