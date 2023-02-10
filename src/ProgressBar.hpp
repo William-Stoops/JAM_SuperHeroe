@@ -39,15 +39,13 @@ class ProgressBar {
     public:
         ProgressBar() = default;
         ProgressBar(float x, float y, ProgressBarType type) {
-            bar.setSize(progressBarSize[type]);
-            bar.setFillColor(progressBarColor[type]);
-            _pos = sf::Vector2f(x, y);
             _pos = sf::Vector2f(x, y);
             fullBar.setSize(progressBarSize[type]);
             fullBar.setFillColor(progressBarColor[type]["fullBar"]);
             fullBar.setPosition(_pos);
             bar.setSize(progressBarSize[type]);
             bar.setFillColor(progressBarColor[type]["bar"]);
+            bar.setPosition(_pos);
         }
 
         sf::Vector2f getPosition() const {

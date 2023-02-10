@@ -6,16 +6,18 @@
 */
 
 #include "Character.hpp"
+#include <iostream>
 
 Character::Character(float x, float y, sf::Sprite &sprite)
 {
-    _healthBar = ProgressBar(x, y + CHARACTERSIZE + 5, HEALTH);
-    _weaponBar = ProgressBar(x, y + CHARACTERSIZE + 10, WEAPONS);
-    _health = 100;
     _sprite = sprite;
     _sprite.setPosition(x, y);
     sf::Vector2f scale(0.01, 0.01);
     _sprite.setScale(scale);
+    sf::FloatRect rect = _sprite.getGlobalBounds();
+    _healthBar = ProgressBar(x, y + rect.height + 5, HEALTH);
+    _weaponBar = ProgressBar(x, y + rect.height + 10, WEAPONS);
+    _health = 100;
 }
 
 void Character::moveLeft() {
