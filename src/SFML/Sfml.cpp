@@ -13,6 +13,7 @@ SFML::SFML() {
     this->window = new sf::RenderWindow(mode, "Epitech Jam");
     this->font = new sf::Font;
     this->text = new sf::Text;
+    this->last_mouse_pos = new sf::Vector2f(0,0);
 
 
     if (!this->font->loadFromFile("assets/oswald.ttf")) exit(84);

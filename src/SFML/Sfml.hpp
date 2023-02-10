@@ -25,6 +25,7 @@ class SFML {
         sf::Font *font;
         sf::Text *text;
         sf::RectangleShape *rectangle;
+        sf::Vector2f *last_mouse_pos;
 };
 
 #endif /* !SFML_HPP_ */
