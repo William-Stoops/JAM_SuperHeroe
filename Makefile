@@ -6,7 +6,8 @@
 ##
 
 SRC	=	src/main.cpp	\
-		src/SFML/Sfml.cpp
+		src/SFML/Sfml.cpp \
+		src/game_over.cpp
 
 OBJ		=	$(SRC:.cpp=.o)
 

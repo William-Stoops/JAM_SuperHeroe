@@ -6,6 +6,16 @@
 */
 
 #include "Sfml.hpp"
+void SFML::addsprite(std::string &name, std::string &path)
+{
+    sf::Texture texture;
+    sf::Sprite sprite;
+    if (!texture.loadFromFile(path))
+        return;
+    sprite.setTexture(texture);
+    sprite.setPosition(0, 0);
+    _sprite[name] = sprite;
+}
 
 SFML::SFML() {
     sf::Vector2u size(800, 800);

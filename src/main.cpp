@@ -38,6 +38,7 @@ void sfml(void)
 
 int main(int ac, char **av)
 {
-    sfml();
+    SFML sfml;
+    game_over_loop(sfml);
     return 0;
 }
