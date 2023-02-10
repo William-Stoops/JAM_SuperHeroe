@@ -8,11 +8,12 @@
 #include "Sfml.hpp"
 void SFML::addsprite(const char *name, const char *path)
 {
-    sf::Texture texture;
+    sf::Texture *texture = new sf::Texture;
     sf::Sprite sprite;
-    if (!texture.loadFromFile(path))
+
+    if (!(*texture).loadFromFile(path))
         return;
-    sprite.setTexture(texture);
+    sprite.setTexture(*texture);
     sprite.setPosition(0, 0);
     std::string str(name);
     _sprite[str] = sprite;
