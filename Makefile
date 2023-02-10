@@ -10,7 +10,7 @@ CLASS	=	./src/class/Game.cpp \
 
 SRC	=	src/main.cpp	\
 		src/SFML/Sfml.cpp \
-		$(CLASS)
+		$(CLASS) \
 		src/Character.cpp
 
 OBJ		=	$(SRC:.cpp=.o)
