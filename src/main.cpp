@@ -7,6 +7,18 @@
 
 #include "main.hpp"
 
+void display(sf::RenderWindow *window)
+{
+    sf::RectangleShape shape(sf::Vector2f(100, 100));
+    shape.setFillColor(sf::Color::Red);
+    sf::RectangleShape shape2(sf::Vector2f(100, 100));
+
+    shape2.setPosition(sf::Vector2f(100, 100));
+    shape2.setFillColor(sf::Color::Magenta);
+    window->draw(shape);
+    window->draw(shape2);
+}
+
 void sfml(void)
 {
     SFML sfml;
@@ -19,6 +31,7 @@ void sfml(void)
                 sfml.window->close();
         }
         sfml.window->clear();
+        display(sfml.window);
         sfml.window->display();
     }
 }

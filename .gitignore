@@ -1,1 +1,6 @@
 *.o
+.idea
+CMakeLists.txt
+EpitechJam
+CMakeCache.txt
+cmake-build-debug
