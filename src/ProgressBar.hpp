@@ -13,11 +13,13 @@
 enum ProgressBarType {
     HEALTH,
     WEAPONS,
+    HUD,
 };
 
 static std::map<ProgressBarType, sf::Vector2f> progressBarSize = {
     {HEALTH, sf::Vector2f(50, 5)},
     {WEAPONS, sf::Vector2f(50, 5)},
+    {HUD, sf::Vector2f(100, 10)},
 };
 
 static std::map<ProgressBarType, std::map<std::string, sf::Color>> progressBarColor = {

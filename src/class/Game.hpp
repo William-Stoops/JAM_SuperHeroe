@@ -5,7 +5,8 @@
 #ifndef JAM_SUPERHEROE_GAME_HPP
     #define JAM_SUPERHEROE_GAME_HPP
 
-#include "Mob.hpp"
+    #include "Mob.hpp"
+    #include "../ProgressBar.hpp"
 
 class Game
 {
@@ -21,6 +22,7 @@ class Game
 
     private:
         std::vector<Mob> _mobs;
+        ProgressBar _progressBar;
 };
 
 
