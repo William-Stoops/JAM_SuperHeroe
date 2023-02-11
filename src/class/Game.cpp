@@ -7,6 +7,7 @@
 Game::Game(SFML sfml)
 {
     this->_progressBar = ProgressBar(0, 0, HUD);
+    this->_hud = Hud();
     this->_character = Character(100, 100, sfml._sprite["spiderman"]);
     this->_mobs = std::vector<Mob>();
     float x = (sfml.window->getSize().x - this->_progressBar.getSize().x) / 2;
@@ -38,11 +39,13 @@ void Game::removeMob(int index)
     this->_mobs.erase(this->_mobs.begin() + index);
 }
 
-void Game::draw(sf::RenderWindow &window) const
+void Game::draw(sf::RenderWindow &window)
 {
-    this->_character.draw(window);
+    this->_character.draw(window, this->_mobs, this->_hud);
     for (auto &mob : this->_mobs) {
         mob.draw(window);
     }
     this->_progressBar.draw(window);
+    this->_hud.draw(window);
 }
+
