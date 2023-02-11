@@ -3,22 +3,48 @@
 //
 
 #include "Mob.hpp"
+#include <cmath>
+#include "iostream"
+
+sf::Vector2f nextPosition(const sf::Vector2f position, sf::Vector2f to, float speed)
+{
+    std::cout << "position: " << position.x << " " << position.y << std::endl;
+    std::cout << "to: " << to.x << " " << to.y << std::endl;
+    sf::Vector2f direction = to - position;
+    std::cout << "direction: " << direction.x << " " << direction.y << std::endl;
+    float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+    sf::Vector2f unitDirection = direction / distance;
+    std::cout << "unitDirection: " << unitDirection.x << " " << unitDirection.y << std::endl;
+
+    sf::Vector2f movement = unitDirection * speed;
+    std::cout << "movement: " << movement.x << " " << movement.y << std::endl;
+    sf::Vector2f nextPosition = position + movement;
+    std::cout << "nextPosition: " << nextPosition.x << " " << nextPosition.y << std::endl;
+    return nextPosition;
+}
 
 Mob::Mob(sf::Vector2f pos, sf::Color color)
 {
     this->_hp = 100;
     this->_speed = 1;
     this->_damage = 10;
-    //while (1) {
-    //    float enemy_x = random.uniform(start_x - min_distance, start_x + min_distance)
-    //    float enemy_y = random.uniform(start_y - min_distance, start_y + min_distance)
-    //    distance = math.sqrt((enemy_x - start_x) ** 2 + (enemy_y - start_y) ** 2)
-    //    if distance >= min_distance:
-    //    break
-    //}
-    this->_pos = pos;
+    float enemy_x;
+    float enemy_y;
+
+    while (1) {
+        int min_distance = 300;
+        enemy_x = rand() % 2 ? pos.x + rand() % min_distance : pos.x - rand() % min_distance;
+        enemy_y = rand() % 2 ? pos.y + rand() % min_distance : pos.y - rand() % min_distance;
+
+        float distance = std::sqrt(std::pow((enemy_x - pos.x), 2) + std::pow((enemy_y - pos.y), 2));
+        std::cout << "distance: " << distance << std::endl;
+        if (distance >= min_distance)
+            break;
+    }
+    this->_pos = sf::Vector2f(enemy_x, enemy_y);
     this->_shape = sf::RectangleShape(sf::Vector2f(100,100));
     this->_shape.setFillColor(color);
+    this->_shape.setPosition(this->_pos);
 }
 
 void Mob::setHp(float hp)
@@ -79,6 +105,15 @@ sf::FloatRect Mob::getRect() const
 bool Mob::operator==(const Mob &mob) const
 {
     return this->_hp == mob._hp && this->_speed == mob._speed && this->_damage == mob._damage && this->_pos == mob._pos;
+}
+
+void Mob::move(sf::Vector2f position)
+{
+    sf::Vector2f pos = nextPosition(this->_shape.getPosition(), position, 0.1);
+    this->getShape().setPosition(pos.x, pos.y);
+    this->getPos() = pos;
+
+    this->_pos = pos;
 }
 
 void Mob::draw(sf::RenderWindow &window) const

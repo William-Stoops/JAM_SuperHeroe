@@ -52,6 +52,7 @@ class Character {
         float getAttack() const;
         float getHealth() const;
         float getEndurance() const;
+        sf::Sprite getSprite() const;
 
         void handleShoot(sf::Vector2f mousePos);
         void handleProjectile(sf::RenderWindow& window, std::vector<Mob> &mobs, Hud &hud);

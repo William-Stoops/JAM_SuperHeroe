@@ -46,6 +46,7 @@ void Game::draw(sf::RenderWindow &window)
 {
     this->_character.draw(window, this->_mobs, this->_hud);
     for (auto &mob : this->_mobs) {
+        mob.move(this->_character.getSprite().getPosition());
         mob.draw(window);
     }
     this->_progressBar.draw(window);

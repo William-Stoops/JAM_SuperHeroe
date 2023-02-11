@@ -19,6 +19,11 @@ Character::Character(float x, float y, sf::Sprite &sprite)
     _endurance = 100;
 }
 
+sf::Sprite Character::getSprite() const
+{
+    return _sprite;
+}
+
 void Character::moveLeft() {
     if (_sprite.getPosition().x < SPEED) return;
     _healthBar.setPosition(_healthBar.getPosition().x - SPEED, _healthBar.getPosition().y);
