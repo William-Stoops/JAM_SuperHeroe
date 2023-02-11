@@ -14,16 +14,16 @@ static sf::Clock MA_PUTAIN_DE_CLOCK;
 void detectInput(sf::Event event, std::map<std::string, bool> &keyMap)
 {
     if (event.type == sf::Event::KeyPressed) {
-        if (event.key.code == sf::Keyboard::Up) keyMap["up"] = true;
-        if (event.key.code == sf::Keyboard::Down) keyMap["down"] = true;
-        if (event.key.code == sf::Keyboard::Left) keyMap["left"] = true;
-        if (event.key.code == sf::Keyboard::Right) keyMap["right"] = true;
+        if (event.key.code == sf::Keyboard::Z) keyMap["up"] = true;
+        if (event.key.code == sf::Keyboard::S) keyMap["down"] = true;
+        if (event.key.code == sf::Keyboard::Q) keyMap["left"] = true;
+        if (event.key.code == sf::Keyboard::D) keyMap["right"] = true;
     }
     if (event.type == sf::Event::KeyReleased) {
-        if (event.key.code == sf::Keyboard::Up) keyMap["up"] = false;
-        if (event.key.code == sf::Keyboard::Down) keyMap["down"] = false;
-        if (event.key.code == sf::Keyboard::Left) keyMap["left"] = false;
-        if (event.key.code == sf::Keyboard::Right) keyMap["right"] = false;
+        if (event.key.code == sf::Keyboard::Z) keyMap["up"] = false;
+        if (event.key.code == sf::Keyboard::S) keyMap["down"] = false;
+        if (event.key.code == sf::Keyboard::Q) keyMap["left"] = false;
+        if (event.key.code == sf::Keyboard::D) keyMap["right"] = false;
     }
 }
 
@@ -35,7 +35,6 @@ void spawn_mobs(Game &game, float time, int frags)
     else
         time = 1;
     static sf::Time spawn_time = sf::seconds(time);
-    std::cout << time << std::endl;
 
     elapsed = MA_PUTAIN_DE_CLOCK.getElapsedTime();
     if (elapsed >= spawn_time) {
