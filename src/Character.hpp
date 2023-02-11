@@ -41,7 +41,7 @@ class Character {
 
         void handleShoot(sf::Vector2f mousePos);
         void handleProjectile(sf::RenderWindow& window, std::vector<Mob> &mobs, Hud &hud);
-        void handleCollision(std::vector<Mob> &mobs, Hud &hud, Projectile *projectile);
+        void handleCollision(std::vector<Mob> &mobs, Hud &hud, std::vector<Projectile>::iterator &it);
         void draw(sf::RenderWindow& window, std::vector<Mob> &mobs, Hud &hud);
 
     private:

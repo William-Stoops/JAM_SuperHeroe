@@ -88,7 +88,7 @@ void Character::handleShoot(sf::Vector2f mousePos) {
     this->setEndurance(this->getEndurance() - 10);
 }
 
-void Character::handleCollision(std::vector<Mob> &mobs, Hud &hud, Projectile *it) {
+void Character::handleCollision(std::vector<Mob> &mobs, Hud &hud, std::vector<Projectile>::iterator &it) {
     for (auto &mob : mobs) {
         if (it->getRect().intersects(mob.getRect())) {
             mob.setHp(mob.getHp() - it->getDamage());
@@ -96,8 +96,11 @@ void Character::handleCollision(std::vector<Mob> &mobs, Hud &hud, Projectile *it
               mobs.erase(std::remove(mobs.begin(), mobs.end(), mob), mobs.end());
               hud.setKills();
             }
+            it = _projectiles.erase(it);
+            return;
         }
     }
+    ++it;
 }
 
 void Character::handleProjectile(sf::RenderWindow &window, std::vector<Mob> &mobs, Hud &hud) {
@@ -108,8 +111,7 @@ void Character::handleProjectile(sf::RenderWindow &window, std::vector<Mob> &mob
         }
         it->draw(window);
         it->move();
-        handleCollision(mobs, hud, &(*it));
-        it++;
+        handleCollision(mobs, hud, it);
     }
 }
 
