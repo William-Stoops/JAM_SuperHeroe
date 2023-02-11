@@ -56,4 +56,7 @@ SFML::SFML() {
     _sprite["close2"].setScale(0.5,0.5);
     _sprite["close2"].setPosition(625, 450);
     _sprite["close2"].setTextureRect(close_rect);
+    addsprite("beercules_over", "./assets/Beercules.png");
+    _sprite["beercules_over"].setScale(0.45, 0.45);
+    _sprite["beercules_over"].setPosition(175, 325);
 }
