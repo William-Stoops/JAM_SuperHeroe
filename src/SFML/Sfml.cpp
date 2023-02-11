@@ -43,11 +43,17 @@ SFML::SFML() {
     _sprite["retry"].setScale(0.5,0.5);
     _sprite["retry"].setPosition(75, 450);
     _sprite["retry"].setTextureRect(retry_rect);
-    sf::FloatRect retry_bounds = _sprite["retry"].getLocalBounds();
-    _sprite["retry"].setOrigin(retry_bounds.width / 2.f, retry_bounds.height / 2.f);
     addsprite("close", "./assets/buttons.png");
     sf::IntRect close_rect(819, 834, 200, 200);
     _sprite["close"].setScale(0.5,0.5);
     _sprite["close"].setPosition(625, 450);
     _sprite["close"].setTextureRect(close_rect);
+    addsprite("retry2", "./assets/buttons2.png");
+    _sprite["retry2"].setScale(0.5,0.5);
+    _sprite["retry2"].setPosition(75, 450);
+    _sprite["retry2"].setTextureRect(retry_rect);
+    addsprite("close2", "./assets/buttons2.png");
+    _sprite["close2"].setScale(0.5,0.5);
+    _sprite["close2"].setPosition(625, 450);
+    _sprite["close2"].setTextureRect(close_rect);
 }
