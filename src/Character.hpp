@@ -52,7 +52,7 @@ class Character {
         ProgressBar _weaponBar;
         sf::Sprite _sprite;
         float _health;
-        float _endurance;
+        float _endurance{};
 };
 
 #endif /* !CHARACTER_HPP_ */

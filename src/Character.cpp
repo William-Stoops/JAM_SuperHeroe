@@ -12,13 +12,14 @@ Character::Character(float x, float y, sf::Sprite &sprite)
 {
     _sprite = sprite;
     _sprite.setPosition(x, y);
-    _sprite.setTextureRect(sf::IntRect(0, 0, 820, 858));
+    _sprite.setTextureRect({0, 0, 32, 32});
     sf::Vector2f scale(0.05, 0.05);
     _sprite.setScale(scale);
     sf::FloatRect rect = _sprite.getGlobalBounds();
     _healthBar = ProgressBar(x, y + rect.height + 5, HEALTH);
     _weaponBar = ProgressBar(x, y + rect.height + 10, WEAPONS);
     _health = 100;
+    _endurance = 100;
 }
 
 void Character::moveLeft() {
