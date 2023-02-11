@@ -53,6 +53,7 @@ int game_over_loop(SFML sfml)
             sfml.window->draw(sfml._sprite["close2"]);
         else
             sfml.window->draw(sfml._sprite["close"]);
+        sfml.window->draw(sfml._sprite["beercules_over"]);
         sfml.window->display();
     }
     return 1;
