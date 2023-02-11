@@ -9,27 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 
-void nextPosition(sf::Vector2f &position, sf::Vector2f to, float speed)
-{
-    sf::Vector2f direction = to - position;
-    float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
-    sf::Vector2f unitDirection = direction / distance;
-
-    sf::Vector2f movement = unitDirection * speed;
-    position += movement;
-}
-
-sf::Vector2f get_shoot_vector(sf::Vector2f *last_mouse_pos, sf::Vector2f center, double speed)
-{
-    sf::Vector2f shoot_vector;
-
-    double angle = atan((last_mouse_pos->y - center.y) / (last_mouse_pos->x - center.x));
-
-    shoot_vector.x = cos(angle) * speed;
-    shoot_vector.y = sin(angle) * speed;
-
-    return shoot_vector;
-}
+static sf::Clock MA_PUTAIN_DE_CLOCK;
 
 void detectInput(sf::Event event, std::map<std::string, bool> &keyMap)
 {
@@ -49,15 +29,13 @@ void detectInput(sf::Event event, std::map<std::string, bool> &keyMap)
 
 void spawn_mobs(Game &game, float time)
 {
-    // Spawn mobs every x seconds with sf::Clock
-    static sf::Clock clock;
-    static sf::Time elapsed = clock.getElapsedTime();
+    static sf::Time elapsed = MA_PUTAIN_DE_CLOCK.getElapsedTime();
     static sf::Time spawn_time = sf::seconds(time);
 
-    elapsed = clock.getElapsedTime();
+    elapsed = MA_PUTAIN_DE_CLOCK.getElapsedTime();
     if (elapsed >= spawn_time) {
         game.addMob(Mob());
-        clock.restart();
+        MA_PUTAIN_DE_CLOCK.restart();
     }
 }
 
@@ -90,12 +68,10 @@ void sfml(void)
                 sfml.last_mouse_pos->x = event.mouseMove.x;
                 sfml.last_mouse_pos->y = event.mouseMove.y;
             }
-            if (event.type == sf::Event::MouseButtonPressed) {
-                if (event.mouseButton.button == sf::Mouse::Left) {
-                    game.getCharacter().handleShoot(*sfml.last_mouse_pos);
-                }
-            }
         }
+
+        game.getCharacter().handleShoot(*sfml.last_mouse_pos);
+
         spawn_mobs(game, 4.0);
         moveCharacter(game, keyMap);
         sfml.window->clear();

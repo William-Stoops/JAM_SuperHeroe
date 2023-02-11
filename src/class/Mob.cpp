@@ -19,21 +19,23 @@ sf::Vector2f nextPosition(const sf::Vector2f position, sf::Vector2f to, float sp
 
 Mob::Mob(sf::Vector2f pos)
 {
-    this->_hp = 100;
+    this->_hp = 20;
     this->_speed = 0.05;
     this->_damage = 0.1;
     float enemy_x;
     float enemy_y;
 
-    while (1) {
-        int min_distance = 300;
-        enemy_x = rand() % 2 ? pos.x + rand() % min_distance : pos.x - rand() % min_distance;
-        enemy_y = rand() % 2 ? pos.y + rand() % min_distance : pos.y - rand() % min_distance;
 
-        float distance = std::sqrt(std::pow((enemy_x - pos.x), 2) + std::pow((enemy_y - pos.y), 2));
-        if (distance >= min_distance)
+    while (1) {
+        enemy_x = -200 + rand() % 1000;
+        enemy_y = -200 + rand() % 1000;
+
+        float distance = std::sqrt(std::pow((enemy_x - 400), 2) + std::pow((enemy_y - 400), 2));
+        float distance2 = std::sqrt(std::pow((enemy_x - pos.x), 2) + std::pow((enemy_y - pos.y), 2));
+        if (distance >= 500 && distance2 >= 400)
             break;
     }
+
     this->_pos = sf::Vector2f(enemy_x, enemy_y);
     sf::Texture *texture = new sf::Texture();
     (*texture).loadFromFile("assets/villain.png");
