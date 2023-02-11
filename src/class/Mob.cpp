@@ -20,7 +20,7 @@ sf::Vector2f nextPosition(const sf::Vector2f position, sf::Vector2f to, float sp
 Mob::Mob(sf::Vector2f pos)
 {
     this->_hp = 100;
-    this->_speed = 1;
+    this->_speed = 0.05;
     this->_damage = 0.1;
     float enemy_x;
     float enemy_y;
@@ -97,7 +97,7 @@ bool Mob::operator==(const Mob &mob) const
 
 void Mob::move(sf::Vector2f position)
 {
-    sf::Vector2f pos = nextPosition(this->_sprite.getPosition(), position, 0.1);
+    sf::Vector2f pos = nextPosition(this->_sprite.getPosition(), position, this->_speed);
     this->_sprite.setPosition(pos.x, pos.y);
     this->_pos = pos;
 }
