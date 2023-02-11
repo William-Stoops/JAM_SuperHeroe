@@ -47,6 +47,20 @@ void detectInput(sf::Event event, std::map<std::string, bool> &keyMap)
     }
 }
 
+void spawn_mobs(Game &game, float time)
+{
+    // Spawn mobs every x seconds with sf::Clock
+    static sf::Clock clock;
+    static sf::Time elapsed = clock.getElapsedTime();
+    static sf::Time spawn_time = sf::seconds(time);
+
+    elapsed = clock.getElapsedTime();
+    if (elapsed >= spawn_time) {
+        game.addMob(Mob());
+        clock.restart();
+    }
+}
+
 void moveCharacter(Game &game, std::map<std::string, bool> &keyMap)
 {
     if (keyMap["up"]) game.getCharacter().moveUp();
@@ -83,6 +97,7 @@ void sfml(void)
             }
         }
         //std::cout << get_shoot_vector(sfml.last_mouse_pos, (sf::Vector2f) {(800 / 2), (800 / 2)}, 1).x << " " << get_shoot_vector(sfml.last_mouse_pos, (sf::Vector2f) {(800 / 2), (800 / 2)}, 1).y << std::endl;
+        spawn_mobs(game, 4.0);
         moveCharacter(game, keyMap);
         sfml.window->clear();
         game.draw(*sfml.window);
