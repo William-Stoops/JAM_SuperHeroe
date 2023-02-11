@@ -47,11 +47,21 @@ void Game::removeMob(int index)
 
 void Game::draw(sf::RenderWindow &window)
 {
-    this->_character.draw(window, this->_mobs, this->_hud);
+    this->_character.draw(window, this->_mobs, this->_hud, this->_exp);
     for (auto &mob : this->_mobs) {
         mob.move(this->_character.getSprite().getPosition());
         mob.draw(window);
     }
+
+    float exp = this->_character.getExp();
+
+    if (exp >= 100) {
+        std::cout << "Level up" << std::endl;
+        this->_character.setLevel();
+        this->_character.setExp(0.0);
+    }
+
+    this->_progressBar.setValue(exp);
     this->_progressBar.draw(window);
     this->_hud.draw(window);
 }

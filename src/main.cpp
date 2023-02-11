@@ -61,6 +61,8 @@ void sfmL(SFML &sfml)
         {"right", false}
     };
 
+    //!(keyMap["up"] && keyMap["down"] && keyMap["left"] && keyMap["right"]);
+
     while (sfml.window->isOpen()) {
         sf::Event event{};
         while (sfml.window->pollEvent(event)) {
@@ -73,8 +75,8 @@ void sfmL(SFML &sfml)
             }
         }
 
-        if (game.getCharacter().getHealth() <= 0)
-            break;
+        //if (game.getCharacter().getHealth() <= 0)
+        //    break;
 
         game.getCharacter().handleShoot(*sfml.last_mouse_pos);
         spawn_mobs(game, 4.0, game.getHud().getKills());

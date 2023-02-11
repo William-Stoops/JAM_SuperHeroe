@@ -18,6 +18,13 @@ Character::Character(float x, float y, sf::Sprite &sprite)
     _health = 100;
     _endurance = 100;
     _attack = 10;
+    _exp = 0.0;
+    _level = 0;
+}
+
+void Character::setLevel(void)
+{
+    _level++;
 }
 
 sf::Sprite Character::getSprite() const
@@ -67,6 +74,14 @@ void Character::setEndurance(float value) {
     _weaponBar.setValue(_endurance);
 }
 
+float Character::getExp() const {
+    return _exp;
+}
+
+void Character::setExp(float value) {
+    _exp = value;
+}
+
 sf::Vector2f Character::getPosition() const {
     return _sprite.getPosition();
 }
@@ -91,15 +106,16 @@ void Character::handleShoot(sf::Vector2f mousePos) {
     if (_endurance <= 10) return;
     sf::FloatRect rect = _sprite.getGlobalBounds();
     sf::Vector2f center = sf::Vector2f(rect.left + rect.width / 2, rect.top + rect.height / 2);
-    _projectiles.push_back(Projectile(center, mousePos, _attack));
+    _projectiles.push_back(Projectile(center, mousePos, _attack, _level));
     this->setEndurance(this->getEndurance() - 10);
 }
 
-void Character::handleCollision(std::vector<Mob> &mobs, Hud &hud, std::vector<Projectile>::iterator &it) {
+void Character::handleCollision(std::vector<Mob> &mobs, Hud &hud, std::vector<Projectile>::iterator &it, std::vector<Exp> &exps) {
     for (auto &mob : mobs) {
         if (it->getRect().intersects(mob.getRect())) {
             mob.setHp(mob.getHp() - it->getDamage());
             if (mob.getHp() <= 0) {
+                exps.push_back(Exp(mob.getPos(), mob.getLevel()));
               mobs.erase(std::remove(mobs.begin(), mobs.end(), mob), mobs.end());
               hud.setKills();
             }
@@ -110,7 +126,7 @@ void Character::handleCollision(std::vector<Mob> &mobs, Hud &hud, std::vector<Pr
     ++it;
 }
 
-void Character::handleProjectile(sf::RenderWindow &window, std::vector<Mob> &mobs, Hud &hud) {
+void Character::handleProjectile(sf::RenderWindow &window, std::vector<Mob> &mobs, Hud &hud, std::vector<Exp> &exps) {
     for (auto it = _projectiles.begin(); it != _projectiles.end();) {
         if (it->isOutOfWindow(window)) {
             it = _projectiles.erase(it);
@@ -118,7 +134,7 @@ void Character::handleProjectile(sf::RenderWindow &window, std::vector<Mob> &mob
         }
         it->draw(window);
         it->move();
-        handleCollision(mobs, hud, it);
+        handleCollision(mobs, hud, it, exps);
     }
 }
 
@@ -134,13 +150,24 @@ void Character::handleMobsCollides(std::vector<Mob> &mobs) {
     }
 }
 
-void Character::draw(sf::RenderWindow& window, std::vector<Mob>& _mobs, Hud& _hud) {
+void Character::handleXp(sf::RenderWindow &window, std::vector<Exp>& exps, Hud &hud) {
+    for (auto &exp : exps) {
+        exp.draw(window);
+        if (exp.getRect().intersects(_sprite.getGlobalBounds())) {
+            _exp += exp.getExp();
+            exps.erase(std::remove(exps.begin(), exps.end(), exp), exps.end());
+        }
+    }
+}
+
+void Character::draw(sf::RenderWindow& window, std::vector<Mob>& _mobs, Hud& _hud, std::vector<Exp>& _exp) {
     setEndurance(_enduranceClock.getElapsedTime().asSeconds() * 10);
     if (_enduranceClock.getElapsedTime().asSeconds() >= 1.0f) {
       _enduranceClock.restart();
     }
     this->handleMobsCollides(_mobs);
-    this->handleProjectile(window, _mobs, _hud);
+    this->handleProjectile(window, _mobs, _hud, _exp);
+    this->handleXp(window, _exp, _hud);
     window.draw(_sprite);
     _healthBar.draw(window);
     _weaponBar.draw(window);

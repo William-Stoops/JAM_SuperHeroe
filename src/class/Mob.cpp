@@ -82,6 +82,11 @@ float Mob::getDamage() const
     return this->_damage;
 }
 
+int Mob::getLevel() const
+{
+    return this->_damage + this->_hp + this->_speed;
+}
+
 sf::Vector2f Mob::getPos() const
 {
     return this->_pos;

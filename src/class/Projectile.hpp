@@ -13,7 +13,7 @@
 class Projectile
 {
     public:
-        Projectile(sf::Vector2f position, sf::Vector2f target, float damage);
+        Projectile(sf::Vector2f position, sf::Vector2f target, float damage, int level);
 
         sf::FloatRect getRect() const;
         float getDamage() const;

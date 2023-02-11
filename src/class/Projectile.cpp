@@ -6,12 +6,15 @@
 */
 
 #include "Projectile.hpp"
-#include <iostream>
+#include <cmath>
+#include <array>
 
-Projectile::Projectile(sf::Vector2f position, sf::Vector2f target, float damage)
+Projectile::Projectile(sf::Vector2f position, sf::Vector2f target, float damage, int level)
 {
+    std::array<sf::Color, 8> colors = {sf::Color::Red, sf::Color::Green, sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta, sf::Color::Cyan, sf::Color::White, sf::Color::Black};
+
     _projectile.setRadius(5.f);
-    _projectile.setFillColor(sf::Color::Red);
+    _projectile.setFillColor(colors[(level / 2) % 8]);
     _projectile.setOrigin(_projectile.getRadius(), _projectile.getRadius());
     _projectile.setPosition(position);
     sf::Vector2f direction = target - position;

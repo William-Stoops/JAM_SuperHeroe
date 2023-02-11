@@ -10,6 +10,7 @@
     #include "../Character.hpp"
     #include "../SFML/Sfml.hpp"
     #include "Hud.hpp"
+    #include "Exp.hpp"
 
 class Game
 {
@@ -23,12 +24,15 @@ class Game
         void addMob(Mob mob);
         void removeMob(Mob mob);
         void removeMob(int index);
+        void addExp(Exp exp);
+        void removeExp(Exp exp);
         Hud &getHud();
 
         void draw(sf::RenderWindow &window);
 
     private:
         std::vector<Mob> _mobs;
+        std::vector<Exp> _exp;
         ProgressBar _progressBar;
         Character _character;
         Hud _hud;
