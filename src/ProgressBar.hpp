@@ -54,6 +54,7 @@ class ProgressBar {
             bar.setSize(progressBarSize[type]);
             bar.setFillColor(progressBarColor[type]["bar"]);
             bar.setPosition(_pos);
+            _type = type;
         }
 
         sf::Vector2f getPosition() const {
@@ -72,6 +73,10 @@ class ProgressBar {
 
         void setValue(float value) {
             _value = value;
+            if (_type == WEAPONS) {
+                bar.setSize(sf::Vector2f((value / 10) * fullBar.getSize().x, fullBar.getSize().y));
+                return;
+            }
             bar.setSize(sf::Vector2f((value / _max) * fullBar.getSize().x, fullBar.getSize().y));
         }
 
@@ -86,6 +91,7 @@ class ProgressBar {
         sf::Vector2f _pos;
         float _max = 100;
         float _value = 100;
+        ProgressBarType _type = HEALTH;
 };
 
 #endif /* !PROGRESSBAR_HPP_ */

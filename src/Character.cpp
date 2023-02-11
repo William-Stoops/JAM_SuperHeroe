@@ -84,7 +84,7 @@ float Character::getEndurance() const {
 }
 
 void Character::handleShoot(sf::Vector2f mousePos) {
-    if (_endurance <= 0) return;
+    if (_endurance <= 10) return;
     sf::FloatRect rect = _sprite.getGlobalBounds();
     sf::Vector2f center = sf::Vector2f(rect.left + rect.width / 2, rect.top + rect.height / 2);
     _projectiles.push_back(Projectile(center, mousePos, _attack));
@@ -131,8 +131,8 @@ void Character::handleMobsCollides(std::vector<Mob> &mobs) {
 }
 
 void Character::draw(sf::RenderWindow& window, std::vector<Mob>& _mobs, Hud& _hud) {
+    setEndurance(_enduranceClock.getElapsedTime().asSeconds() * 10);
     if (_enduranceClock.getElapsedTime().asSeconds() >= 1.0f) {
-      setEndurance(getEndurance() + 5);
       _enduranceClock.restart();
     }
     this->handleMobsCollides(_mobs);
