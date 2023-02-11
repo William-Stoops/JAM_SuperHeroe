@@ -21,7 +21,7 @@ Mob::Mob(sf::Vector2f pos, sf::Color color)
 {
     this->_hp = 100;
     this->_speed = 1;
-    this->_damage = 10;
+    this->_damage = 0.1;
     float enemy_x;
     float enemy_y;
 
@@ -31,7 +31,6 @@ Mob::Mob(sf::Vector2f pos, sf::Color color)
         enemy_y = rand() % 2 ? pos.y + rand() % min_distance : pos.y - rand() % min_distance;
 
         float distance = std::sqrt(std::pow((enemy_x - pos.x), 2) + std::pow((enemy_y - pos.y), 2));
-        std::cout << "distance: " << distance << std::endl;
         if (distance >= min_distance)
             break;
     }

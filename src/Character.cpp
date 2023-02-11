@@ -53,7 +53,7 @@ void Character::moveDown() {
 }
 
 void Character::setHealth(float value) {
-    _health += value;
+    _health = value;
     _healthBar.setValue(_health);
 }
 
@@ -115,7 +115,20 @@ void Character::handleProjectile(sf::RenderWindow &window, std::vector<Mob> &mob
     }
 }
 
+void Character::handleMobsCollides(std::vector<Mob> &mobs) {
+    for (auto &mob : mobs) {
+        if (mob.getRect().intersects(_sprite.getGlobalBounds())) {
+            this->setHealth(this->getHealth() - mob.getDamage());
+            if (_health <= 0) {
+                _health = 0;
+            }
+            _healthBar.setValue(_health);
+        }
+    }
+}
+
 void Character::draw(sf::RenderWindow& window, std::vector<Mob>& _mobs, Hud& _hud) {
+    this->handleMobsCollides(_mobs);
     this->handleProjectile(window, _mobs, _hud);
     window.draw(_sprite);
     _healthBar.draw(window);
