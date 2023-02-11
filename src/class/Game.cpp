@@ -13,8 +13,11 @@ Game::Game(SFML sfml)
     this->_mobs = std::vector<Mob>();
     float x = (sfml.window->getSize().x - this->_progressBar.getSize().x) / 2;
     this->_progressBar.setPosition(x, 35);
-    Mob mob(pos);
-    addMob(mob);
+}
+
+Hud &Game::getHud()
+{
+    return this->_hud;
 }
 
 std::vector<Mob> &Game::getMobs()

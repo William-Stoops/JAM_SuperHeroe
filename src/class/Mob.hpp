@@ -10,7 +10,7 @@
 class Mob
 {
     public:
-        Mob(sf::Vector2f pos = sf::Vector2f(0, 0));
+        Mob(sf::Vector2f pos, int frags);
         ~Mob() = default;
 
         void setHp(float hp);

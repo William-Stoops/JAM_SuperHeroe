@@ -17,11 +17,11 @@ sf::Vector2f nextPosition(const sf::Vector2f position, sf::Vector2f to, float sp
     return nextPosition;
 }
 
-Mob::Mob(sf::Vector2f pos)
+Mob::Mob(sf::Vector2f pos, int frags)
 {
-    this->_hp = 20;
-    this->_speed = 0.05;
-    this->_damage = 0.1;
+    this->_hp = 10 + (frags * 0.05);
+    this->_speed = 0.05 + (frags * 0.001);
+    this->_damage = 0.05;
     float enemy_x;
     float enemy_y;
 

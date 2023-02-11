@@ -67,6 +67,10 @@ void Character::setEndurance(float value) {
     _weaponBar.setValue(_endurance);
 }
 
+sf::Vector2f Character::getPosition() const {
+    return _sprite.getPosition();
+}
+
 void Character::setAttack(float value) {
     _attack = value;
 }

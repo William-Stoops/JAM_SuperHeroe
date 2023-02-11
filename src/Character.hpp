@@ -38,6 +38,7 @@ class Character {
         float getHealth() const;
         float getEndurance() const;
         sf::Sprite getSprite() const;
+        sf::Vector2f getPosition() const;
 
         void handleShoot(sf::Vector2f mousePos);
         void handleMobsCollides(std::vector<Mob> &mobs);

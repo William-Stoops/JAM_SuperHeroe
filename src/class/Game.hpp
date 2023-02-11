@@ -23,6 +23,7 @@ class Game
         void addMob(Mob mob);
         void removeMob(Mob mob);
         void removeMob(int index);
+        Hud &getHud();
 
         void draw(sf::RenderWindow &window);
 

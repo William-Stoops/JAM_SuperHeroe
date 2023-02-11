@@ -27,14 +27,19 @@ void detectInput(sf::Event event, std::map<std::string, bool> &keyMap)
     }
 }
 
-void spawn_mobs(Game &game, float time)
+void spawn_mobs(Game &game, float time, int frags)
 {
     static sf::Time elapsed = MA_PUTAIN_DE_CLOCK.getElapsedTime();
+    if (time > 1)
+        time = time - (frags * 0.032);
+    else
+        time = 1;
     static sf::Time spawn_time = sf::seconds(time);
+    std::cout << time << std::endl;
 
     elapsed = MA_PUTAIN_DE_CLOCK.getElapsedTime();
     if (elapsed >= spawn_time) {
-        game.addMob(Mob());
+        game.addMob(Mob(game.getCharacter().getPosition(), frags));
         MA_PUTAIN_DE_CLOCK.restart();
     }
 }
@@ -73,7 +78,7 @@ void sfmL(SFML &sfml)
             break;
 
         game.getCharacter().handleShoot(*sfml.last_mouse_pos);
-        spawn_mobs(game, 4.0);
+        spawn_mobs(game, 4.0, game.getHud().getKills());
         moveCharacter(game, keyMap);
         sfml.window->clear();
         (*sfml.window).draw(sfml._sprite["background"]);
