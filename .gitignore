@@ -1,5 +1,6 @@
 *.o
 .idea
+.vscode
 CMakeLists.txt
 EpitechJam
 CMakeCache.txt

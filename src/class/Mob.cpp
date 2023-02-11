@@ -68,3 +68,8 @@ bool Mob::operator==(const Mob &mob) const
 {
     return this->_hp == mob._hp && this->_speed == mob._speed && this->_damage == mob._damage && this->_pos == mob._pos;
 }
+
+void Mob::draw(sf::RenderWindow &window) const
+{
+    window.draw(this->_shape);
+}

@@ -25,6 +25,8 @@ class Mob
         sf::Vector2f getPos() const;
         sf::RectangleShape getShape() const;
 
+        void draw(sf::RenderWindow &window) const;
+
         bool operator==(const Mob &mob) const;
 
     private:
