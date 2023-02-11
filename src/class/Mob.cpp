@@ -8,18 +8,12 @@
 
 sf::Vector2f nextPosition(const sf::Vector2f position, sf::Vector2f to, float speed)
 {
-    std::cout << "position: " << position.x << " " << position.y << std::endl;
-    std::cout << "to: " << to.x << " " << to.y << std::endl;
     sf::Vector2f direction = to - position;
-    std::cout << "direction: " << direction.x << " " << direction.y << std::endl;
     float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
     sf::Vector2f unitDirection = direction / distance;
-    std::cout << "unitDirection: " << unitDirection.x << " " << unitDirection.y << std::endl;
 
     sf::Vector2f movement = unitDirection * speed;
-    std::cout << "movement: " << movement.x << " " << movement.y << std::endl;
     sf::Vector2f nextPosition = position + movement;
-    std::cout << "nextPosition: " << nextPosition.x << " " << nextPosition.y << std::endl;
     return nextPosition;
 }
 
@@ -110,9 +104,7 @@ bool Mob::operator==(const Mob &mob) const
 void Mob::move(sf::Vector2f position)
 {
     sf::Vector2f pos = nextPosition(this->_shape.getPosition(), position, 0.1);
-    this->getShape().setPosition(pos.x, pos.y);
-    this->getPos() = pos;
-
+    this->_shape.setPosition(pos.x, pos.y);
     this->_pos = pos;
 }
 
