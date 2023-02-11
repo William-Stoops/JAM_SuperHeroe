@@ -17,7 +17,7 @@ sf::Vector2f nextPosition(const sf::Vector2f position, sf::Vector2f to, float sp
     return nextPosition;
 }
 
-Mob::Mob(sf::Vector2f pos, sf::Color color)
+Mob::Mob(sf::Vector2f pos)
 {
     this->_hp = 100;
     this->_speed = 1;
@@ -35,9 +35,14 @@ Mob::Mob(sf::Vector2f pos, sf::Color color)
             break;
     }
     this->_pos = sf::Vector2f(enemy_x, enemy_y);
-    this->_shape = sf::RectangleShape(sf::Vector2f(100,100));
-    this->_shape.setFillColor(color);
-    this->_shape.setPosition(this->_pos);
+    sf::Texture *texture = new sf::Texture();
+    (*texture).loadFromFile("assets/villain.png");
+
+    sf::Sprite sprite;
+    this->_sprite = sprite;
+    this->_sprite.setTexture(*texture);
+    this->_sprite.setTextureRect(sf::IntRect(3, 6, 38, 42));
+    this->_sprite.setPosition(this->_pos);
 }
 
 void Mob::setHp(float hp)
@@ -60,11 +65,6 @@ void Mob::setPos(sf::Vector2f pos)
     this->_pos = pos;
 }
 
-void Mob::setShape(sf::RectangleShape shape)
-{
-    this->_shape = shape;
-}
-
 float Mob::getHp() const
 {
     return this->_hp;
@@ -85,14 +85,9 @@ sf::Vector2f Mob::getPos() const
     return this->_pos;
 }
 
-sf::RectangleShape Mob::getShape() const
-{
-    return this->_shape;
-}
-
 sf::FloatRect Mob::getRect() const
 {
-    return this->_shape.getGlobalBounds();
+    return this->_sprite.getGlobalBounds();
 }
 
 bool Mob::operator==(const Mob &mob) const
@@ -102,12 +97,12 @@ bool Mob::operator==(const Mob &mob) const
 
 void Mob::move(sf::Vector2f position)
 {
-    sf::Vector2f pos = nextPosition(this->_shape.getPosition(), position, 0.1);
-    this->_shape.setPosition(pos.x, pos.y);
+    sf::Vector2f pos = nextPosition(this->_sprite.getPosition(), position, 0.1);
+    this->_sprite.setPosition(pos.x, pos.y);
     this->_pos = pos;
 }
 
 void Mob::draw(sf::RenderWindow &window) const
 {
-    window.draw(this->_shape);
+    window.draw(this->_sprite);
 }

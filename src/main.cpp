@@ -82,9 +82,9 @@ void sfml(void)
                 }
             }
         }
-        //std::cout << get_shoot_vector(sfml.last_mouse_pos, (sf::Vector2f) {(800 / 2), (800 / 2)}, 1).x << " " << get_shoot_vector(sfml.last_mouse_pos, (sf::Vector2f) {(800 / 2), (800 / 2)}, 1).y << std::endl;
         moveCharacter(game, keyMap);
         sfml.window->clear();
+        (*sfml.window).draw(sfml._sprite["background"]);
         game.draw(*sfml.window);
         sfml.window->display();
     }

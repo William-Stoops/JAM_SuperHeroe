@@ -10,20 +10,18 @@
 class Mob
 {
     public:
-        Mob(sf::Vector2f pos = sf::Vector2f(0, 0), sf::Color color = sf::Color::Red);
+        Mob(sf::Vector2f pos = sf::Vector2f(0, 0));
         ~Mob() = default;
 
         void setHp(float hp);
         void setSpeed(float speed);
         void setDamage(float damage);
         void setPos(sf::Vector2f pos);
-        void setShape(sf::RectangleShape shape);
 
         float getHp() const;
         float getSpeed() const;
         float getDamage() const;
         sf::Vector2f getPos() const;
-        sf::RectangleShape getShape() const;
         sf::FloatRect getRect() const;
         void move(sf::Vector2f pos);
 
@@ -36,7 +34,7 @@ class Mob
         float _speed;
         float _damage;
         sf::Vector2f _pos;
-        sf::RectangleShape _shape;
+        sf::Sprite _sprite;
 };
 
 

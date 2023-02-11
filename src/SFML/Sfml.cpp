@@ -35,5 +35,6 @@ SFML::SFML() {
     this->rectangle->setFillColor(sf::Color::Transparent);
     this->rectangle->setOutlineThickness(2);
     this->rectangle->setOutlineColor(sf::Color::White);
-    addsprite("spiderman", "./assets/spelunky.png");
+    addsprite("spiderman", "./assets/hero.png");
+    addsprite("background", "./assets/map.png");
 }
