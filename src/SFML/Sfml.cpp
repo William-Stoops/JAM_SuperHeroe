@@ -6,16 +6,17 @@
 */
 
 #include "Sfml.hpp"
-void SFML::addsprite(std::string &name, std::string &path)
+void SFML::addsprite(const char *name, const char *path)
 {
-    sf::Texture texture;
+    sf::Texture *texture = new sf::Texture;
     sf::Sprite sprite;
-    printf("%s", path);
-    if (!texture.loadFromFile(path))
+
+    if (!(*texture).loadFromFile(path))
         return;
-    sprite.setTexture(texture);
+    sprite.setTexture(*texture);
     sprite.setPosition(0, 0);
-    _sprite[name] = sprite;
+    std::string str(name);
+    _sprite[str] = sprite;
 }
 
 SFML::SFML() {
@@ -24,6 +25,7 @@ SFML::SFML() {
     this->window = new sf::RenderWindow(mode, "Epitech Jam");
     this->font = new sf::Font;
     this->text = new sf::Text;
+    this->last_mouse_pos = new sf::Vector2f(0,0);
 
 
     if (!this->font->loadFromFile("assets/oswald.ttf")) exit(84);
@@ -33,4 +35,5 @@ SFML::SFML() {
     this->rectangle->setFillColor(sf::Color::Transparent);
     this->rectangle->setOutlineThickness(2);
     this->rectangle->setOutlineColor(sf::Color::White);
+    addsprite("spiderman", "./assets/spelunky.png");
 }

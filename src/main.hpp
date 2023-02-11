@@ -18,6 +18,7 @@
     #include <list>
     #include <sys/utsname.h>
     #include "SFML/Sfml.hpp"
+    #include "Character.hpp"
     #include <sstream>
     #include <map>
 

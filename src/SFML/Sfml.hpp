@@ -20,14 +20,14 @@ class SFML {
     public:
         SFML();
         ~SFML() = default;
-
-        void addsprite(std::string &name, std::string &path);
+        void addsprite(const char *name, const char *path);
 
         sf::RenderWindow *window;
         sf::Font *font;
         sf::Text *text;
         sf::RectangleShape *rectangle;
         std::map<std::string,sf::Sprite> _sprite;
+        sf::Vector2f *last_mouse_pos;
 };
 
 #endif /* !SFML_HPP_ */
