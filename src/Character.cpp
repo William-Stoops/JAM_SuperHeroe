@@ -61,6 +61,8 @@ void Character::setHealth(float value) {
 void Character::setEndurance(float value) {
     if (value < 0)
         value = 0;
+    if (value > 100)
+        value = 100;
     _endurance = value;
     _weaponBar.setValue(_endurance);
 }
@@ -129,6 +131,10 @@ void Character::handleMobsCollides(std::vector<Mob> &mobs) {
 }
 
 void Character::draw(sf::RenderWindow& window, std::vector<Mob>& _mobs, Hud& _hud) {
+    if (_enduranceClock.getElapsedTime().asSeconds() >= 1.0f) {
+      setEndurance(getEndurance() + 5);
+      _enduranceClock.restart();
+    }
     this->handleMobsCollides(_mobs);
     this->handleProjectile(window, _mobs, _hud);
     window.draw(_sprite);

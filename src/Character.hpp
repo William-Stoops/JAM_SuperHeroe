@@ -47,6 +47,7 @@ class Character {
 
     private:
         std::vector<Projectile> _projectiles;
+        sf::Clock _enduranceClock;
         sf::RectangleShape rectangle;
         ProgressBar _healthBar;
         ProgressBar _weaponBar;
