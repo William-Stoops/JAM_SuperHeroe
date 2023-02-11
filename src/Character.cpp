@@ -17,6 +17,7 @@ Character::Character(float x, float y, sf::Sprite &sprite)
     _weaponBar = ProgressBar(x, y + rect.height + 10, WEAPONS);
     _health = 100;
     _endurance = 100;
+    _attack = 10;
 }
 
 sf::Sprite Character::getSprite() const
