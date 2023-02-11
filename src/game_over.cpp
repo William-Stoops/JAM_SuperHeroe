@@ -7,26 +7,22 @@
 #include "main.hpp"
 
 
-void handle_retry_close(SFML sfml, sf::Event event)
+int handle_click(SFML sfml, sf::Event event, const char *name)
 {
     if (event.type == sf::Event::MouseButtonReleased &&
              event.mouseButton.button == sf::Mouse::Left)
     {
         sf::Vector2i mousePos = sf::Mouse::getPosition(*sfml.window);
-        if (sfml._sprite["retry"].getGlobalBounds().contains(mousePos.x,
-                                                             mousePos.y))
+        if (sfml._sprite[name].getGlobalBounds().contains(mousePos.x,
+                                                          mousePos.y))
         {
-            printf("retry");
-        }
-        if (sfml._sprite["close"].getGlobalBounds().contains(mousePos.x,
-                                                             mousePos.y))
-        {
-            sfml.window->close();
+            return 1;
         }
     }
+    return 0;
 }
 
-void game_over_loop(SFML sfml)
+int game_over_loop(SFML sfml)
 {
     while (sfml.window->isOpen())
     {
@@ -40,6 +36,24 @@ void game_over_loop(SFML sfml)
         sfml.window->draw(sfml._sprite["game_over"]);
         sfml.window->draw(sfml._sprite["retry"]);
         sfml.window->draw(sfml._sprite["close"]);
+        if (handle_click(sfml, event, "close") == 1) {
+            sfml.window->close();
+            return 1;
+        }
+       if (handle_click(sfml, event, "retry") == 1)
+            return 0;
+        sf::Vector2i mousePos = sf::Mouse::getPosition(*sfml.window);
+        if (sfml._sprite["retry"].getGlobalBounds().contains(mousePos.x,
+                                                          mousePos.y))
+            sfml.window->draw(sfml._sprite["retry2"]);
+        else
+            sfml.window->draw(sfml._sprite["retry"]);
+        if (sfml._sprite["close"].getGlobalBounds().contains(mousePos.x,
+                                                             mousePos.y))
+            sfml.window->draw(sfml._sprite["close2"]);
+        else
+            sfml.window->draw(sfml._sprite["close"]);
         sfml.window->display();
     }
+    return 1;
 }

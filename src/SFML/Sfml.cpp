@@ -37,4 +37,23 @@ SFML::SFML() {
     this->rectangle->setOutlineColor(sf::Color::White);
     addsprite("spiderman", "./assets/hero.png");
     addsprite("background", "./assets/map.png");
+    addsprite("game_over", "./assets/game over.png");
+    addsprite("retry", "./assets/buttons.png");
+    sf::IntRect retry_rect(2036, 208, 200, 200);
+    _sprite["retry"].setScale(0.5,0.5);
+    _sprite["retry"].setPosition(75, 450);
+    _sprite["retry"].setTextureRect(retry_rect);
+    addsprite("close", "./assets/buttons.png");
+    sf::IntRect close_rect(819, 834, 200, 200);
+    _sprite["close"].setScale(0.5,0.5);
+    _sprite["close"].setPosition(625, 450);
+    _sprite["close"].setTextureRect(close_rect);
+    addsprite("retry2", "./assets/buttons2.png");
+    _sprite["retry2"].setScale(0.5,0.5);
+    _sprite["retry2"].setPosition(75, 450);
+    _sprite["retry2"].setTextureRect(retry_rect);
+    addsprite("close2", "./assets/buttons2.png");
+    _sprite["close2"].setScale(0.5,0.5);
+    _sprite["close2"].setPosition(625, 450);
+    _sprite["close2"].setTextureRect(close_rect);
 }

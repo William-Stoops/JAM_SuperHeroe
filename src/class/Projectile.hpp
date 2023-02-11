@@ -27,6 +27,7 @@ private:
     sf::CircleShape _projectile;
     sf::Vector2f _velocity;
     float _damage;
+    sf::Clock _clock;
 };
 
 #endif /* !PROJECTILE_HPP_ */

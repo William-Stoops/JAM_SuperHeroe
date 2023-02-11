@@ -19,11 +19,15 @@ Projectile::Projectile(sf::Vector2f position, sf::Vector2f target, float damage)
     direction /= magnitude;
     _velocity = direction * _speed;
     _damage = damage;
+    _clock.restart();
 }
 
 void Projectile::move()
 {
+    if (_clock.getElapsedTime().asSeconds() < 0.001)
+        return;
     _projectile.move(_velocity);
+    _clock.restart();
 }
 
 void Projectile::draw(sf::RenderWindow &window)
