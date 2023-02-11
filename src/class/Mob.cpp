@@ -71,6 +71,11 @@ sf::RectangleShape Mob::getShape() const
     return this->_shape;
 }
 
+sf::FloatRect Mob::getRect() const
+{
+    return this->_shape.getGlobalBounds();
+}
+
 bool Mob::operator==(const Mob &mob) const
 {
     return this->_hp == mob._hp && this->_speed == mob._speed && this->_damage == mob._damage && this->_pos == mob._pos;

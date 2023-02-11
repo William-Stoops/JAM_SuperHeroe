@@ -9,6 +9,7 @@
     #include "../ProgressBar.hpp"
     #include "../Character.hpp"
     #include "../SFML/Sfml.hpp"
+    #include "Hud.hpp"
 
 class Game
 {
@@ -23,13 +24,14 @@ class Game
         void removeMob(Mob mob);
         void removeMob(int index);
 
-        void draw(sf::RenderWindow &window) const;
+        void draw(sf::RenderWindow &window);
 
     private:
         std::vector<Mob> _mobs;
         ProgressBar _progressBar;
         Character _character;
+        Hud _hud;
 };
 
 
-#endif //JAM_SUPERHEROE_GAME_HPP
+#endif //JAM_SUPERHEROE_GAME_HPP//

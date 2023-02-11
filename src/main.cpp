@@ -54,6 +54,11 @@ void sfml(void)
                 sfml.last_mouse_pos->x = event.mouseMove.x;
                 sfml.last_mouse_pos->y = event.mouseMove.y;
             }
+            if (event.type == sf::Event::MouseButtonPressed) {
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    game.getCharacter().handleShoot(*sfml.last_mouse_pos);
+                }
+            }
         }
         //std::cout << get_shoot_vector(sfml.last_mouse_pos, (sf::Vector2f) {(800 / 2), (800 / 2)}, 1).x << " " << get_shoot_vector(sfml.last_mouse_pos, (sf::Vector2f) {(800 / 2), (800 / 2)}, 1).y << std::endl;
         sfml.window->clear();

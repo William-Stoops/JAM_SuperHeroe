@@ -24,6 +24,7 @@ class Mob
         float getDamage() const;
         sf::Vector2f getPos() const;
         sf::RectangleShape getShape() const;
+        sf::FloatRect getRect() const;
 
         void draw(sf::RenderWindow &window) const;
 

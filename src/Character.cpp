@@ -6,7 +6,6 @@
 */
 
 #include "Character.hpp"
-#include <iostream>
 
 Character::Character(float x, float y, sf::Sprite &sprite)
 {
@@ -48,14 +47,32 @@ void Character::moveDown() {
     _weaponBar.setPosition(_weaponBar.getPosition().x, _weaponBar.getPosition().y + SPEED);
 }
 
-void Character::updateHealth(float value) {
+void Character::setHealth(float value) {
     _health += value;
     _healthBar.setValue(_health);
 }
 
-void Character::updateEndurance(float value) {
-    _endurance += value;
+void Character::setEndurance(float value) {
+    if (value < 0)
+        value = 0;
+    _endurance = value;
     _weaponBar.setValue(_endurance);
+}
+
+void Character::setAttack(float value) {
+    _attack = value;
+}
+
+float Character::getAttack() const {
+    return _attack;
+}
+
+float Character::getHealth() const {
+    return _health;
+}
+
+float Character::getEndurance() const {
+    return _endurance;
 }
 
 void Character::move(int key) {
@@ -70,9 +87,42 @@ void Character::move(int key) {
         (this->*moveFunctions[it->second])();
 }
 
-void Character::draw(sf::RenderWindow& window) const {
+void Character::handleShoot(sf::Vector2f mousePos) {
+    if (_endurance <= 0) return;
+    sf::FloatRect rect = _sprite.getGlobalBounds();
+    sf::Vector2f center = sf::Vector2f(rect.left + rect.width / 2, rect.top + rect.height / 2);
+    _projectiles.push_back(Projectile(center, mousePos, _attack));
+    this->setEndurance(this->getEndurance() - 10);
+}
+
+void Character::handleCollision(std::vector<Mob> &mobs, Hud &hud, Projectile *it) {
+    for (auto &mob : mobs) {
+        if (it->getRect().intersects(mob.getRect())) {
+            mob.setHp(mob.getHp() - it->getDamage());
+            if (mob.getHp() <= 0) {
+              mobs.erase(std::remove(mobs.begin(), mobs.end(), mob), mobs.end());
+              hud.setKills();
+            }
+        }
+    }
+}
+
+void Character::handleProjectile(sf::RenderWindow &window, std::vector<Mob> &mobs, Hud &hud) {
+    for (auto it = _projectiles.begin(); it != _projectiles.end();) {
+        if (it->isOutOfWindow(window)) {
+            it = _projectiles.erase(it);
+            continue;
+        }
+        it->draw(window);
+        it->move();
+        handleCollision(mobs, hud, &(*it));
+        it++;
+    }
+}
+
+void Character::draw(sf::RenderWindow& window, std::vector<Mob>& _mobs, Hud& _hud) {
+    this->handleProjectile(window, _mobs, _hud);
     window.draw(_sprite);
     _healthBar.draw(window);
     _weaponBar.draw(window);
 }
-
