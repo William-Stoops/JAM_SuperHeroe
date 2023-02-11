@@ -46,7 +46,7 @@ void Character::moveUp() {
 }
 
 void Character::moveDown() {
-    if (_sprite.getPosition().y > WINDOWY - (CHARACTERSIZE + SPEED)) return;
+    if (_sprite.getPosition().y > WINDOWY - (CHARACTERSIZE + SPEED + 10 + _healthBar.getSize().y + _weaponBar.getSize().y)) return;
     _healthBar.setPosition(_healthBar.getPosition().x, _healthBar.getPosition().y + SPEED);
     _sprite.move(0, SPEED);
     _weaponBar.setPosition(_weaponBar.getPosition().x, _weaponBar.getPosition().y + SPEED);
@@ -78,18 +78,6 @@ float Character::getHealth() const {
 
 float Character::getEndurance() const {
     return _endurance;
-}
-
-void Character::move(int key) {
-    void (Character::*moveFunctions[])(void) = {
-        &Character::moveLeft,
-        &Character::moveRight,
-        &Character::moveUp,
-        &Character::moveDown
-    };
-    auto it = keyMap.find(key);
-    if (it != keyMap.end())
-        (this->*moveFunctions[it->second])();
 }
 
 void Character::handleShoot(sf::Vector2f mousePos) {

@@ -14,25 +14,11 @@
     #include "class/Projectile.hpp"
     #include <map>
 
-    #define SPEED 5
+    #define SPEED 0.1f
     #define WINDOWX 800
     #define WINDOWY 800
 
     #define CHARACTERSIZE 50
-
-enum Direction {
-    LEFT,
-    RIGHT,
-    UP,
-    DOWN
-};
-
-static std::map<int, Direction> keyMap = {
-    {sf::Keyboard::Left, LEFT},
-    {sf::Keyboard::Right, RIGHT},
-    {sf::Keyboard::Up, UP},
-    {sf::Keyboard::Down, DOWN}
-};
 
 class Character {
     public:
@@ -43,7 +29,6 @@ class Character {
         void moveRight();
         void moveUp();
         void moveDown();
-        void move(int key);
 
         void setHealth(float value);
         void setEndurance(float value);
