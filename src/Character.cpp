@@ -12,9 +12,7 @@ Character::Character(float x, float y, sf::Sprite &sprite)
 {
     _sprite = sprite;
     _sprite.setPosition(x, y);
-    _sprite.setTextureRect({0, 0, 32, 32});
-    sf::Vector2f scale(0.05, 0.05);
-    _sprite.setScale(scale);
+    _sprite.setTextureRect({756, 378, 40, 54});
     sf::FloatRect rect = _sprite.getGlobalBounds();
     _healthBar = ProgressBar(x, y + rect.height + 5, HEALTH);
     _weaponBar = ProgressBar(x, y + rect.height + 10, WEAPONS);

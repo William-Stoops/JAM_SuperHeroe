@@ -64,6 +64,7 @@ void sfml(void)
 
 int main(void)
 {
+    srand(time(NULL));
     sfml();
     return 0;
 }

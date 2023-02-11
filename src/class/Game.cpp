@@ -6,14 +6,17 @@
 
 Game::Game(SFML sfml)
 {
+    sf::Vector2f pos(100, 100);
     this->_progressBar = ProgressBar(0, 0, HUD);
-    this->_character = Character(100, 100, sfml._sprite["spiderman"]);
+    this->_character = Character(pos.x, pos.y, sfml._sprite["spiderman"]);
     this->_mobs = std::vector<Mob>();
     float x = (sfml.window->getSize().x - this->_progressBar.getSize().x) / 2;
     this->_progressBar.setPosition(x, 35);
+    Mob mob(pos, sf::Color::Red);
+    addMob(mob);
 }
 
-std::vector<Mob> Game::getMobs()
+std::vector<Mob> &Game::getMobs()
 {
     return this->_mobs;
 }

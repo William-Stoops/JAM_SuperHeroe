@@ -16,7 +16,7 @@ class Game
         Game() = default;
         Game(SFML sfml);
 
-        std::vector<Mob> getMobs();
+        std::vector<Mob> &getMobs();
         Character &getCharacter();
 
         void addMob(Mob mob);
