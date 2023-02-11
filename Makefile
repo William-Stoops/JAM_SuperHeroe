@@ -7,6 +7,8 @@
 
 CLASS	=	./src/class/Game.cpp \
 			./src/class/Mob.cpp \
+			./src/class/Hud.cpp \
+			./src/class/Projectile.cpp \
 
 SRC	=	src/main.cpp	\
 		src/SFML/Sfml.cpp \
