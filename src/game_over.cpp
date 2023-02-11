@@ -33,19 +33,24 @@ void game_over_loop(SFML sfml)
                 sfml.window->close();
         }
         sfml.window->clear();
-        float scaleX = (float)sfml.window->getSize().x / sfml
-            ._sprite["retry"].getTexture()->getSize().x;
-        float scaleY = (float)sfml.window->getSize().y / sfml
-            ._sprite["retry"].getTexture()->getSize().y;
-        float scale = std::min(scaleX, scaleY);
-        sfml._sprite["retry"].setScale(scale * 1, scale * 0.9);
-        //sfml._sprite["game_over"].setScale(scale, scale);
-        sfml._sprite["close"].setScale(scale * 1, scale * 0.9);
         sfml.window->draw(sfml._sprite["game_over"]);
         sfml.window->draw(sfml._sprite["retry"]);
         sfml.window->draw(sfml._sprite["close"]);
         if (handle_click(sfml, event, "close") == 1)
             sfml.window->close();
+       // if (handle_click(sfml, event, "retry") == 1)
+            //inserer fonction game ici
+        sf::Vector2i mousePos = sf::Mouse::getPosition(*sfml.window);
+        if (sfml._sprite["retry"].getGlobalBounds().contains(mousePos.x,
+                                                          mousePos.y))
+            sfml.window->draw(sfml._sprite["retry2"]);
+        else
+            sfml.window->draw(sfml._sprite["retry"]);
+        if (sfml._sprite["close"].getGlobalBounds().contains(mousePos.x,
+                                                             mousePos.y))
+            sfml.window->draw(sfml._sprite["close2"]);
+        else
+            sfml.window->draw(sfml._sprite["close"]);
         sfml.window->display();
     }
 }
