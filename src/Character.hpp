@@ -45,6 +45,7 @@ class Character {
         void handleProjectile(sf::RenderWindow& window, std::vector<Mob> &mobs, Hud &hud);
         void handleCollision(std::vector<Mob> &mobs, Hud &hud, std::vector<Projectile>::iterator &it);
         void draw(sf::RenderWindow& window, std::vector<Mob> &mobs, Hud &hud);
+        void animate();
 
     private:
         std::vector<Projectile> _projectiles;

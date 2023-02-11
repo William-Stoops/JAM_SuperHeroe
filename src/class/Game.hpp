@@ -10,6 +10,7 @@
     #include "../Character.hpp"
     #include "../SFML/Sfml.hpp"
     #include "Hud.hpp"
+    #include "../Character.hpp"
 
 class Game
 {
@@ -20,6 +21,7 @@ class Game
         std::vector<Mob> &getMobs();
         Character &getCharacter();
 
+        void animate();
         void addMob(Mob mob);
         void removeMob(Mob mob);
         void removeMob(int index);

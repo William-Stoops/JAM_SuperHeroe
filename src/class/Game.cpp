@@ -56,3 +56,11 @@ void Game::draw(sf::RenderWindow &window)
     this->_hud.draw(window);
 }
 
+void Game::animate()
+{
+    for (auto &mob : this->_mobs) {
+        mob.animate();
+    }
+    _character.animate();
+}
+

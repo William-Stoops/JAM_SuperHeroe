@@ -104,6 +104,14 @@ void Mob::move(sf::Vector2f position)
     this->_pos = pos;
 }
 
+void Mob::animate()
+{
+    this->_sprite.setTextureRect(sf::IntRect(this->_sprite.getTextureRect()
+                                                 .left + 50, 6, 38, 42));
+    if (this->_sprite.getTextureRect().left > 103)
+        this->_sprite.setTextureRect(sf::IntRect(3, 6, 38, 42));
+}
+
 void Mob::draw(sf::RenderWindow &window) const
 {
     window.draw(this->_sprite);

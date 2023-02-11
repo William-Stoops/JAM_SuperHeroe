@@ -24,6 +24,7 @@ class Mob
         sf::Vector2f getPos() const;
         sf::FloatRect getRect() const;
         void move(sf::Vector2f pos);
+        void animate();
 
         void draw(sf::RenderWindow &window) const;
 

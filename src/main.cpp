@@ -60,7 +60,7 @@ void sfmL(SFML &sfml)
         {"left", false},
         {"right", false}
     };
-
+    sf::Clock clock;
     while (sfml.window->isOpen()) {
         sf::Event event{};
         while (sfml.window->pollEvent(event)) {
@@ -82,6 +82,11 @@ void sfmL(SFML &sfml)
         sfml.window->clear();
         (*sfml.window).draw(sfml._sprite["background"]);
         game.draw(*sfml.window);
+        float elapsedsecond = clock.getElapsedTime().asSeconds();
+        if (elapsedsecond > 0.15) {
+            game.animate();
+            clock.restart();
+        }
         sfml.window->display();
     }
 }
