@@ -83,7 +83,9 @@ void sfml(void)
 
 int main(void)
 {
-    srand(time(NULL));
-    sfml();
+    SFML sfml;
+    game_start_loop(sfml);
+    //srand(time(NULL));
+    //sfml();
     return 0;
 }

@@ -16,7 +16,8 @@ add_executable(EpitechJam
         src/class/Game.cpp
         src/class/Mob.cpp
         src/class/Projectile.cpp
-        src/class/Hud.cpp)
+        src/class/Hud.cpp
+        src/start.cpp)
 
 target_link_libraries(EpitechJam PRIVATE sfml-window sfml-system sfml-audio sfml-graphics)
 
