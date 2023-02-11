@@ -19,12 +19,6 @@ void nextPosition(sf::Vector2f &position, sf::Vector2f to, float speed)
     position += movement;
 }
 
-void detectInput(int keyCode, Character &character)
-{
-    if (keyMap.find(keyCode) != keyMap.end())
-        character.move(keyCode);
-}
-
 sf::Vector2f get_shoot_vector(sf::Vector2f *last_mouse_pos, sf::Vector2f center, double speed)
 {
     sf::Vector2f shoot_vector;
@@ -37,19 +31,47 @@ sf::Vector2f get_shoot_vector(sf::Vector2f *last_mouse_pos, sf::Vector2f center,
     return shoot_vector;
 }
 
+void detectInput(sf::Event event, std::map<std::string, bool> &keyMap)
+{
+    if (event.type == sf::Event::KeyPressed) {
+        if (event.key.code == sf::Keyboard::Up) keyMap["up"] = true;
+        if (event.key.code == sf::Keyboard::Down) keyMap["down"] = true;
+        if (event.key.code == sf::Keyboard::Left) keyMap["left"] = true;
+        if (event.key.code == sf::Keyboard::Right) keyMap["right"] = true;
+    }
+    if (event.type == sf::Event::KeyReleased) {
+        if (event.key.code == sf::Keyboard::Up) keyMap["up"] = false;
+        if (event.key.code == sf::Keyboard::Down) keyMap["down"] = false;
+        if (event.key.code == sf::Keyboard::Left) keyMap["left"] = false;
+        if (event.key.code == sf::Keyboard::Right) keyMap["right"] = false;
+    }
+}
+
+void moveCharacter(Game &game, std::map<std::string, bool> &keyMap)
+{
+    if (keyMap["up"]) game.getCharacter().moveUp();
+    if (keyMap["down"]) game.getCharacter().moveDown();
+    if (keyMap["left"]) game.getCharacter().moveLeft();
+    if (keyMap["right"]) game.getCharacter().moveRight();
+}
+
 void sfml(void)
 {
     SFML sfml;
     Game game(sfml);
+    std::map<std::string, bool> keyMap = {
+        {"up", false},
+        {"down", false},
+        {"left", false},
+        {"right", false}
+    };
 
-    while (sfml.window->isOpen())
-    {
+    while (sfml.window->isOpen()) {
         sf::Event event{};
         while (sfml.window->pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 sfml.window->close();
-            if (event.type == sf::Event::KeyPressed)
-                detectInput(event.key.code, game.getCharacter());
+            detectInput(event, keyMap);
             if (event.type == sf::Event::MouseMoved) {
                 sfml.last_mouse_pos->x = event.mouseMove.x;
                 sfml.last_mouse_pos->y = event.mouseMove.y;
@@ -61,6 +83,7 @@ void sfml(void)
             }
         }
         //std::cout << get_shoot_vector(sfml.last_mouse_pos, (sf::Vector2f) {(800 / 2), (800 / 2)}, 1).x << " " << get_shoot_vector(sfml.last_mouse_pos, (sf::Vector2f) {(800 / 2), (800 / 2)}, 1).y << std::endl;
+        moveCharacter(game, keyMap);
         sfml.window->clear();
         game.draw(*sfml.window);
         sfml.window->display();
