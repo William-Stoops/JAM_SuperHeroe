@@ -37,8 +37,8 @@ void game_start_loop(SFML sfml)
         sfml.window->draw(sfml._sprite["Play"]);
         sfml.window->draw(sfml._sprite["Leaderboard"]);
         sfml.window->draw(sfml._sprite["Logo"]);
-        //if (handle_start_click(sfml, event, "Play") == 1)
-            //inserer fonction game ici
+        if (handle_start_click(sfml, event, "Play") == 1)
+            break;
         //if (handle_start_click(sfml, event, "Leaderboard") == 1)
             //inserer fonction leaderboard ici
         sf::Vector2i mousePos = sf::Mouse::getPosition(*sfml.window);
