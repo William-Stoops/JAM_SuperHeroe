@@ -36,12 +36,13 @@ class Character {
         void setAttack(float value);
         void setLevel(void);
 
-    float getAttack() const;
+        float getAttack() const;
         float getHealth() const;
         float getEndurance() const;
         sf::Sprite getSprite() const;
         sf::Vector2f getPosition() const;
         float getExp() const;
+        int getLevel() const;
         void setExp(float value);
 
         void handleShoot(sf::Vector2f mousePos);

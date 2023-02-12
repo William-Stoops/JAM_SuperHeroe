@@ -19,7 +19,7 @@ Character::Character(float x, float y, sf::Sprite &sprite)
     _endurance = 100;
     _attack = 10;
     _exp = 0.0;
-    _level = 0;
+    _level = 1;
 }
 
 void Character::setLevel(void)
@@ -102,6 +102,10 @@ float Character::getEndurance() const {
     return _endurance;
 }
 
+int Character::getLevel() const {
+    return _level;
+}
+
 void Character::handleShoot(sf::Vector2f mousePos) {
     if (_endurance <= 10) return;
     sf::FloatRect rect = _sprite.getGlobalBounds();
@@ -115,7 +119,7 @@ void Character::handleCollision(std::vector<Mob> &mobs, Hud &hud, std::vector<Pr
         if (it->getRect().intersects(mob.getRect())) {
             mob.setHp(mob.getHp() - it->getDamage());
             if (mob.getHp() <= 0) {
-                exps.push_back(Exp(mob.getPos(), mob.getLevel()));
+                exps.push_back(Exp(mob.getPos()));
               mobs.erase(std::remove(mobs.begin(), mobs.end(), mob), mobs.end());
               hud.setKills();
             }

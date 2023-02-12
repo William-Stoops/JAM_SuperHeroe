@@ -5,7 +5,7 @@
 #include "Exp.hpp"
 #include <iostream>
 
-Exp::Exp(sf::Vector2f position, float exp)
+Exp::Exp(sf::Vector2f position)
 {
     sf::Texture *texture = new sf::Texture();
     (*texture).loadFromFile("assets/chauve_qui_peu.png");
@@ -16,7 +16,7 @@ Exp::Exp(sf::Vector2f position, float exp)
     _bat.setRotation(rand() % 360);
     _rotation = rand() % 360;
     _position = position;
-    _exp = exp;
+    _exp = 10;
 }
 
 sf::FloatRect Exp::getRect() const
