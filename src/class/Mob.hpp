@@ -36,6 +36,7 @@ class Mob
         float _damage;
         sf::Vector2f _pos;
         sf::Sprite _sprite;
+        int _first_left;
 };
 
 

@@ -5,6 +5,7 @@
 #include "Mob.hpp"
 #include <cmath>
 #include "iostream"
+#include <array>
 
 sf::Vector2f nextPosition(const sf::Vector2f position, sf::Vector2f to, float speed)
 {
@@ -40,10 +41,18 @@ Mob::Mob(sf::Vector2f pos, int frags)
     sf::Texture *texture = new sf::Texture();
     (*texture).loadFromFile("assets/villain.png");
 
+    std::array<sf::IntRect, 8> rect =
+    {sf::IntRect(3, 6, 38, 42), sf::IntRect(0, 198, 47, 42),
+     sf::IntRect(152, 4, 32, 44), sf::IntRect(288, 198, 46, 44),
+     sf::IntRect(437, 6, 35, 42), sf::IntRect(148, 198, 30, 42),
+     sf::IntRect(292, 193, 39, 47), sf::IntRect(440, 198, 47, 42)};
+
     sf::Sprite sprite;
     this->_sprite = sprite;
     this->_sprite.setTexture(*texture);
-    this->_sprite.setTextureRect(sf::IntRect(3, 6, 38, 42));
+    sf::IntRect rect2 = rect[rand() % 8];
+    this->_sprite.setTextureRect(rect2);
+    this->_first_left = rect2.left;
     this->_sprite.setPosition(this->_pos);
 }
 
@@ -106,10 +115,14 @@ void Mob::move(sf::Vector2f position)
 
 void Mob::animate()
 {
-    this->_sprite.setTextureRect(sf::IntRect(this->_sprite.getTextureRect()
-                                                 .left + 50, 6, 38, 42));
-    if (this->_sprite.getTextureRect().left > 103)
-        this->_sprite.setTextureRect(sf::IntRect(3, 6, 38, 42));
+    sf::IntRect rect = this->_sprite.getTextureRect();
+    rect.left += 50;
+    this->_sprite.setTextureRect(rect);
+
+    if (rect.left > _first_left + 140) {
+        rect.left = _first_left;
+        this->_sprite.setTextureRect(rect);
+    }
 }
 
 void Mob::draw(sf::RenderWindow &window) const
