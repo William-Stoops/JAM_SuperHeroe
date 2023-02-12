@@ -172,3 +172,11 @@ void Character::draw(sf::RenderWindow& window, std::vector<Mob>& _mobs, Hud& _hu
     _healthBar.draw(window);
     _weaponBar.draw(window);
 }
+
+void Character::animate()
+{
+    _sprite.setTextureRect(sf::IntRect(_sprite.getTextureRect().left - 67 ,
+                                       378,40,54));
+    if (_sprite.getTextureRect().left < 420)
+        _sprite.setTextureRect({756, 378, 40, 54});
+}

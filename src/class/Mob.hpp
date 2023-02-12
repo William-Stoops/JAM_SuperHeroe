@@ -25,6 +25,7 @@ class Mob
         sf::FloatRect getRect() const;
         void move(sf::Vector2f pos);
         int getLevel() const;
+        void animate();
 
         void draw(sf::RenderWindow &window) const;
 
@@ -36,6 +37,7 @@ class Mob
         float _damage;
         sf::Vector2f _pos;
         sf::Sprite _sprite;
+        int _first_left;
 };
 
 
