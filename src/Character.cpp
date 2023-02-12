@@ -154,13 +154,12 @@ void Character::handleMobsCollides(std::vector<Mob> &mobs) {
     }
 }
 
-void Character::handleXp(sf::RenderWindow &window, std::vector<Exp>& exps, Hud &hud) {
+void Character::handleXp(sf::RenderWindow &window, std::vector<Exp>& exps) {
     for (auto &exp : exps) {
-        exp.draw(window);
         if (exp.getRect().intersects(_sprite.getGlobalBounds())) {
             _exp += exp.getExp();
             exps.erase(std::remove(exps.begin(), exps.end(), exp), exps.end());
-        }
+        } else exp.draw(window);
     }
 }
 
@@ -171,7 +170,7 @@ void Character::draw(sf::RenderWindow& window, std::vector<Mob>& _mobs, Hud& _hu
     }
     this->handleMobsCollides(_mobs);
     this->handleProjectile(window, _mobs, _hud, _exp);
-    this->handleXp(window, _exp, _hud);
+    this->handleXp(window, _exp);
     window.draw(_sprite);
     _healthBar.draw(window);
     _weaponBar.draw(window);
