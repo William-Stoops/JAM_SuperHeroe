@@ -46,7 +46,7 @@ static std::map<ProgressBarType, std::map<std::string, sf::Color>> progressBarCo
 class ProgressBar {
     public:
         ProgressBar() = default;
-        ProgressBar(float x, float y, ProgressBarType type) {
+        ProgressBar(float x, float y, ProgressBarType type, float max = 100) {
             _pos = sf::Vector2f(x, y);
             fullBar.setSize(progressBarSize[type]);
             fullBar.setFillColor(progressBarColor[type]["fullBar"]);
@@ -55,6 +55,7 @@ class ProgressBar {
             bar.setFillColor(progressBarColor[type]["bar"]);
             bar.setPosition(_pos);
             _type = type;
+            _max = max;
         }
 
         sf::Vector2f getPosition() const {
@@ -78,6 +79,10 @@ class ProgressBar {
                 return;
             }
             bar.setSize(sf::Vector2f((value / _max) * fullBar.getSize().x, fullBar.getSize().y));
+        }
+
+        void setMax(float max) {
+            _max = max;
         }
 
         void draw(sf::RenderWindow &window) const {

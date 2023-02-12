@@ -10,7 +10,7 @@
 class Exp
 {
     public:
-        Exp(sf::Vector2f position, float exp = 0);
+        Exp(sf::Vector2f position);
 
         sf::FloatRect getRect() const;
 
