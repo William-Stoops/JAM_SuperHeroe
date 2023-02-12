@@ -23,7 +23,8 @@ class Game
         Character &getCharacter();
 
         //void animate();
-        void animate(std::map<std::string, bool> &keyMap);
+        void animate(std::map<std::string, bool> &keyMap, int lastkey, int
+        lastkey2);
         void addMob(Mob mob);
         void removeMob(Mob mob);
         void removeMob(int index);

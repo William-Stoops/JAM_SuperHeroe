@@ -177,15 +177,28 @@ void Character::draw(sf::RenderWindow& window, std::vector<Mob>& _mobs, Hud& _hu
     _weaponBar.draw(window);
 }
 
-void Character::animate()
+void Character::animate(int lastkey)
 {
-    _sprite.setTextureRect(sf::IntRect(_sprite.getTextureRect().left - 67 ,
-                                       378,40,54));
-    if (_sprite.getTextureRect().left < 420)
+    if (lastkey == 2 && (_sprite.getTextureRect().left >= 420 && _sprite
+    .getTextureRect().left <= 756))
+        _sprite.setTextureRect(sf::IntRect(_sprite.getTextureRect().left - 67 ,378,40,54));
+    if (!(_sprite.getTextureRect().left >= 420 && _sprite.getTextureRect()
+    .left <= 756) && lastkey == 2)
         _sprite.setTextureRect({756, 378, 40, 54});
+    if (lastkey == 1 && (_sprite.getTextureRect().left >= 18 && _sprite
+    .getTextureRect().left <= 354))
+        _sprite.setTextureRect(sf::IntRect(_sprite.getTextureRect().left - 67 ,
+                                           380,40,54));
+    if (!(_sprite.getTextureRect().left >= 18 && _sprite.getTextureRect()
+    .left <= 354) && lastkey == 1)
+        _sprite.setTextureRect({354, 380, 40, 54});
 }
 
-void Character::unanimate()
+void Character::unanimate(int lastkey)
 {
-    _sprite.setTextureRect({756, 378, 40, 54});
+    if (lastkey == 2)
+        _sprite.setTextureRect({756, 378, 40, 54});
+    if (lastkey == 1)
+        _sprite.setTextureRect({354, 380, 40, 54});
+    printf("%d", lastkey);
 }

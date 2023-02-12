@@ -51,8 +51,8 @@ class Character {
         void handleCollision(std::vector<Mob> &mobs, Hud &hud, std::vector<Projectile>::iterator &it, std::vector<Exp> &exps);
         void handleXp(sf::RenderWindow &window, std::vector<Exp>& exps, Hud &hud);
         void draw(sf::RenderWindow& window, std::vector<Mob>& _mobs, Hud& _hud, std::vector<Exp>& _exp);
-        void animate();
-        void unanimate();
+        void animate(int lastkey);
+        void unanimate(int lastkey);
 
         private:
         std::vector<Projectile> _projectiles;

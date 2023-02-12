@@ -43,16 +43,20 @@ void spawn_mobs(Game &game, float time, int frags)
     }
 }
 
-void moveCharacter(Game &game, std::map<std::string, bool> &keyMap)
+int moveCharacter(Game &game, std::map<std::string, bool> &keyMap)
 {
-    if (keyMap["up"]) game.getCharacter().moveUp();
-    if (keyMap["down"]) game.getCharacter().moveDown();
-    if (keyMap["left"]) game.getCharacter().moveLeft();
-    if (keyMap["right"]) game.getCharacter().moveRight();
+    int last_key = 0;
+    if (keyMap["up"]) {game.getCharacter().moveUp(); last_key = 1;}
+    if (keyMap["down"]) {game.getCharacter().moveDown(); last_key = 2;}
+    if (keyMap["left"]) {game.getCharacter().moveLeft(); last_key = 2;}
+    if (keyMap["right"]) {game.getCharacter().moveRight(); last_key = 2;}
+    return last_key;
 }
 
 int sfmL(SFML &sfml)
 {
+    int last_key = 0;
+    int last_key2 = 0;
     Game game(sfml);
     std::map<std::string, bool> keyMap = {
         {"up", false},
@@ -79,13 +83,15 @@ int sfmL(SFML &sfml)
 
         game.getCharacter().handleShoot(*sfml.last_mouse_pos);
         spawn_mobs(game, 4.0, game.getHud().getKills());
-        moveCharacter(game, keyMap);
+        last_key = moveCharacter(game, keyMap);
+        if (last_key != 0)
+            last_key2 = last_key;
         sfml.window->clear();
         (*sfml.window).draw(sfml._sprite["background"]);
         game.draw(*sfml.window);
         float elapsedsecond = clock.getElapsedTime().asSeconds();
         if (elapsedsecond > 0.15) {
-            game.animate(keyMap);
+            game.animate(keyMap, last_key, last_key2);
             clock.restart();
         }
         sfml.window->display();

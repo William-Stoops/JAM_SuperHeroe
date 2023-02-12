@@ -90,13 +90,14 @@ void Game::draw(sf::RenderWindow &window)
     this->_hud.draw(window);
 }
 
-void Game::animate(std::map<std::string, bool> &keyMap)
+void Game::animate(std::map<std::string, bool> &keyMap, int lastkey, int
+lastkey2)
 {
     for (auto &mob : this->_mobs) {
         mob.animate();
     }
     if (keyMap["up"] || keyMap["down"] || keyMap["left"] || keyMap["right"])
-        _character.animate();
+        _character.animate(lastkey);
     else
-        _character.unanimate();
+        _character.unanimate(lastkey2);
 }
