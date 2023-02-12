@@ -101,6 +101,7 @@ int main(void)
     srand(time(NULL));
 
     while (game_over == 0) {
+        game_start_loop(sfmls);
         kills = sfmL(sfmls);
         game_over = game_over_loop(sfmls, kills);
     }

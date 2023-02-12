@@ -23,5 +23,7 @@
     #include <map>
 
 int game_over_loop(SFML sfml, int kills);
-void sfml(void);
+void game_start_loop(SFML sfml);
+SFML sfml(void);
+
 #endif /* !MAIN_HPP_ */

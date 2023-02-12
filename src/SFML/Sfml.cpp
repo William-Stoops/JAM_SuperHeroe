@@ -59,4 +59,27 @@ SFML::SFML() {
     addsprite("beercules_over", "./assets/Beercules.png");
     _sprite["beercules_over"].setScale(0.45, 0.45);
     _sprite["beercules_over"].setPosition(175, 325);
+    addsprite("start", "./assets/backstart.jpg");
+    _sprite["start"].setScale(1.39,2.23);
+    addsprite("Play", "./assets/buttons.png");
+    sf::IntRect play_rect(1826, 0, 200, 200);
+    _sprite["Play"].setScale(0.8,0.8);
+    _sprite["Play"].setPosition(100, 450);
+    _sprite["Play"].setTextureRect(play_rect);
+    addsprite("Leaderboard", "./assets/buttons.png");
+    sf::IntRect leaderboard_rect(1826, 417, 200, 200);
+    _sprite["Leaderboard"].setScale(0.8,0.8);
+    _sprite["Leaderboard"].setPosition(525, 450);
+    _sprite["Leaderboard"].setTextureRect(leaderboard_rect);
+    addsprite("Play2", "./assets/buttons2.png");
+    _sprite["Play2"].setScale(0.8,0.8);
+    _sprite["Play2"].setPosition(100, 450);
+    _sprite["Play2"].setTextureRect(play_rect);
+    addsprite("Leaderboard2", "./assets/buttons2.png");
+    _sprite["Leaderboard2"].setScale(0.8,0.8);
+    _sprite["Leaderboard2"].setPosition(525, 450);
+    _sprite["Leaderboard2"].setTextureRect(leaderboard_rect);
+    addsprite("Logo", "./assets/beer.png");
+    _sprite["Logo"].setScale(0.5,0.5);
+    _sprite["Logo"].setPosition(100, -100);
 }
