@@ -90,11 +90,11 @@ void Game::draw(sf::RenderWindow &window)
     this->_hud.draw(window);
 }
 
-void Game::animate()
+void Game::animate(std::map<std::string, bool> &keyMap)
 {
     for (auto &mob : this->_mobs) {
         mob.animate();
     }
-    _character.animate();
+    if (keyMap["up"] || keyMap["down"] || keyMap["left"] || keyMap["right"])
+        _character.animate();
 }
-

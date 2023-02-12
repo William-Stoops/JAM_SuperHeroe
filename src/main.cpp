@@ -85,7 +85,7 @@ int sfmL(SFML &sfml)
         game.draw(*sfml.window);
         float elapsedsecond = clock.getElapsedTime().asSeconds();
         if (elapsedsecond > 0.15) {
-            game.animate();
+            game.animate(keyMap);
             clock.restart();
         }
         sfml.window->display();

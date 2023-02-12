@@ -22,7 +22,8 @@ class Game
         std::vector<Mob> &getMobs();
         Character &getCharacter();
 
-        void animate();
+        //void animate();
+        void animate(std::map<std::string, bool> &keyMap);
         void addMob(Mob mob);
         void removeMob(Mob mob);
         void removeMob(int index);
