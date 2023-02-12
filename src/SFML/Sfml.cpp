@@ -22,7 +22,7 @@ void SFML::addsprite(const char *name, const char *path)
 SFML::SFML() {
     sf::Vector2u size(800, 800);
     sf::VideoMode mode(size.x, size.y);
-    this->window = new sf::RenderWindow(mode, "Epitech Jam");
+    this->window = new sf::RenderWindow(mode, "Epitech Jam", sf::Style::Close);
     this->font = new sf::Font;
     this->text = new sf::Text;
     this->last_mouse_pos = new sf::Vector2f(0,0);

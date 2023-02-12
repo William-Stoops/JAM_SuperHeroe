@@ -51,7 +51,7 @@ void moveCharacter(Game &game, std::map<std::string, bool> &keyMap)
     if (keyMap["right"]) game.getCharacter().moveRight();
 }
 
-void sfmL(SFML &sfml)
+int sfmL(SFML &sfml)
 {
     Game game(sfml);
     std::map<std::string, bool> keyMap = {
@@ -74,8 +74,8 @@ void sfmL(SFML &sfml)
             }
         }
 
-        //if (game.getCharacter().getHealth() <= 0)
-        //    break;
+        if (game.getCharacter().getHealth() <= 0)
+            return game.getHud().getKills();
 
         game.getCharacter().handleShoot(*sfml.last_mouse_pos);
         spawn_mobs(game, 4.0, game.getHud().getKills());
@@ -90,17 +90,19 @@ void sfmL(SFML &sfml)
         }
         sfml.window->display();
     }
+    return 1;
 }
 
 int main(void)
 {
     SFML sfmls;
     int game_over = 0;
+    int kills = 0;
     srand(time(NULL));
 
     while (game_over == 0) {
-        sfmL(sfmls);
-        game_over = game_over_loop(sfmls);
+        kills = sfmL(sfmls);
+        game_over = game_over_loop(sfmls, kills);
     }
     return 0;
 }

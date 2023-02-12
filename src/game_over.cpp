@@ -22,8 +22,19 @@ int handle_click(SFML sfml, sf::Event event, const char *name)
     return 0;
 }
 
-int game_over_loop(SFML sfml)
+int game_over_loop(SFML sfml, int kills)
 {
+    sf::Text text;
+    sf::Font font;
+
+    if (!font.loadFromFile("assets/oswald.ttf"))
+        return 1;
+    text.setFont(font);
+    text.setString("Demande a ta maman de t'aider, elle saura te guider,\n\t\t\tcar c'est elle ton hero du quotidien");
+    text.setCharacterSize(24);
+    text.setFillColor(sf::Color::Red);
+    text.setPosition(180, 0);
+
     while (sfml.window->isOpen())
     {
         sf::Event event{};
@@ -36,6 +47,8 @@ int game_over_loop(SFML sfml)
         sfml.window->draw(sfml._sprite["game_over"]);
         sfml.window->draw(sfml._sprite["retry"]);
         sfml.window->draw(sfml._sprite["close"]);
+        if (kills == 0)
+            sfml.window->draw(text);
         if (handle_click(sfml, event, "close") == 1) {
             sfml.window->close();
             return 1;
