@@ -52,6 +52,7 @@ class Character {
         void handleXp(sf::RenderWindow &window, std::vector<Exp>& exps, Hud &hud);
         void draw(sf::RenderWindow& window, std::vector<Mob>& _mobs, Hud& _hud, std::vector<Exp>& _exp);
         void animate();
+        void unanimate();
 
         private:
         std::vector<Projectile> _projectiles;

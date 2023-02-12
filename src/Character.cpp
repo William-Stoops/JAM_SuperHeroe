@@ -184,3 +184,8 @@ void Character::animate()
     if (_sprite.getTextureRect().left < 420)
         _sprite.setTextureRect({756, 378, 40, 54});
 }
+
+void Character::unanimate()
+{
+    _sprite.setTextureRect({756, 378, 40, 54});
+}

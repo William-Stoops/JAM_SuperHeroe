@@ -97,4 +97,6 @@ void Game::animate(std::map<std::string, bool> &keyMap)
     }
     if (keyMap["up"] || keyMap["down"] || keyMap["left"] || keyMap["right"])
         _character.animate();
+    else
+        _character.unanimate();
 }
