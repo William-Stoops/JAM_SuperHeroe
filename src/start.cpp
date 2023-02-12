@@ -34,23 +34,15 @@ void game_start_loop(SFML sfml)
         sfml.window->clear();
         sfml.window->draw(sfml._sprite["start"]);
         sfml.window->draw(sfml._sprite["Play"]);
-        sfml.window->draw(sfml._sprite["Leaderboard"]);
         sfml.window->draw(sfml._sprite["Logo"]);
         if (handle_start_click(sfml, event, "Play") == 1)
             break;
-        //if (handle_start_click(sfml, event, "Leaderboard") == 1)
-            //inserer fonction leaderboard ici
         sf::Vector2i mousePos = sf::Mouse::getPosition(*sfml.window);
         if (sfml._sprite["Play"].getGlobalBounds().contains(mousePos.x,
                                                           mousePos.y))
             sfml.window->draw(sfml._sprite["Play2"]);
         else
             sfml.window->draw(sfml._sprite["Play"]);
-        if (sfml._sprite["Leaderboard"].getGlobalBounds().contains(mousePos.x,
-                                                             mousePos.y))
-            sfml.window->draw(sfml._sprite["Leaderboard2"]);
-        else
-            sfml.window->draw(sfml._sprite["Leaderboard"]);
         sfml.window->display();
     }
 }
