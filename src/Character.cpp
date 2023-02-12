@@ -205,5 +205,4 @@ void Character::unanimate(int lastkey)
         _sprite.setTextureRect({756, 378, 40, 54});
     if (lastkey == 1)
         _sprite.setTextureRect({354, 380, 40, 54});
-    printf("%d", lastkey);
 }
