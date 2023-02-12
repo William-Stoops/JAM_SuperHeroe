@@ -158,7 +158,13 @@ void Character::handleXp(sf::RenderWindow &window, std::vector<Exp>& exps) {
     for (auto &exp : exps) {
         if (exp.getRect().intersects(_sprite.getGlobalBounds())) {
             _exp += exp.getExp();
-            exps.erase(std::remove(exps.begin(), exps.end(), exp), exps.end());
+            if (exps.size() == 1) {
+                exps.clear();
+                break;
+            } else {
+                exps.erase(std::remove(exps.begin(), exps.end(), exp), exps.end());
+                break;
+            }
         } else exp.draw(window);
     }
 }
