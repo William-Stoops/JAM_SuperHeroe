@@ -50,6 +50,8 @@ int moveCharacter(Game &game, std::map<std::string, bool> &keyMap)
     if (keyMap["down"]) {game.getCharacter().moveDown(); last_key = 2;}
     if (keyMap["left"]) {game.getCharacter().moveLeft(); last_key = 2;}
     if (keyMap["right"]) {game.getCharacter().moveRight(); last_key = 2;}
+    if (keyMap["right"] && keyMap["up"] || keyMap["left"] && keyMap["up"])
+        last_key = 1;
     return last_key;
 }
 
